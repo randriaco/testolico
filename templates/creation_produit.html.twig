@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter un Produit{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+	
+		<div class="mx-auto" style="width: 900px;">
+		
+			<h1 class="text-center mt-5">Ajouter un Produit</h1>
+
+			{# Affichage des messages flash #}
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success">
+					{{ message }}
+				</div>
+			{% endfor %}
+
+			{{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': ''}}) }}
+
+				{% for field in form %}
+					<div class="mb-3">
+						{{ form_label(field, null, {'label_attr': {'class': 'form-label'}}) }}
+						{# {{ form_widget(field, {'attr': {'class': 'form-control'}}) }} #}
+						{{ form_widget(field, {'attr': {'class': 'form-control', 'style': 'width: 400px;'}}) }}
+
+						{{ form_errors(field, {'attr': {'class': 'invalid-feedback'}}) }}
+					</div>
+				{% endfor %}
+
+				<div class="mb-3">
+					<button type="submit" class="btn btn-primary">Ajouter</button>
+				</div>
+
+			{{ form_end(form) }}
+
+			<br>
+
+			<h2>Liste des Produits</h2>
+
+			<br>
+
+			<table class="table table-bordered text-center">
+			
+				<thead>
+					<tr>
+						<th>Photo</th>
+						<th>Nom</th>
+						<th>Description</th>
+						<th>Prix</th>
+						<th>Categorie</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+
+					{% for produit in listeProduits %}
+
+						<tr>
+							<td><img src="{{ produit.photo ? asset('images/produits/' ~ produit.photo) : '' }}" alt="Photo du produit" style="width: 100px; height: auto;"></td>
+							<td>{{ produit.nom }}</td>
+							<td>{{ produit.description }}</td>
+							<td>{{ produit.prix }}</td>
+							<td>{{ produit.categorie.nom }}</td>
+							<td>
+								<a href="{{ path('modifier_produit', {'id': produit.id}) }}" class="btn btn-primary">Modifier</a>
+								<button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+									Supprimer
+								</button>
+							</td>
+						</tr>
+						
+						{# ------------------------------------------debut :  Modal --------------------------------------------- #}
+                    
+						<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+							<div class="modal-dialog">
+								<div class="modal-content">
+								<div class="modal-header">
+									<h1 class="modal-title fs-5" id="staticBackdropLabel">Supprimer Produit</h1>
+									<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									Etes-vous sur de supprimer ce produit ?
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-success" data-bs-dismiss="modal">Non</button>
+									<a href="{{ path('supprimer_produit', {'id': produit.id}) }}" class="btn btn-danger">Oui</a>
+								</div>
+								</div>
+							</div>
+						</div>
+						
+						{# ------------------------------------------fin :  Modal --------------------------------------------- #}
+
+					{% endfor %}
+
+				</tbody>
+				
+			</table>
+
+		</div>
+		
+	</div>
+	
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}Confirmation de Réservation{% endblock %}
+
+{% block body %}
+
+    <br><br>
+
+    <div class="container mt-4 mb-4 p-4 " style="max-width: 800px;">
+
+        <div class="card mx-auto" style="width: 700px;">
+            
+            <div class="card-body">
+            
+                <h5 class="card-title">Confirmation de votre réservation</h5>
+                
+                <p class="card-text">
+            
+                    Votre réservation a été bien confirmée pour <b>{{ nombreCouverts }}</b> couvert(s) le <b>{{ dateReservation|date('d/m/Y') }}</b> 
+                    à <b>{{ horaireReservation }}</b>. 
+                    Nous vous remercions de votre réservation et avons hâte de vous accueillir.
+                    <br><br>
+                    De plus, nous sommes ravis de vous informer que vous pouvez désormais <b>commander et payer en ligne</b>
+                    votre entrée, boisson, plat, menu et dessert. Il suffit de cliquer sur le bouton Commander. 
+                    <br><br>
+                    C’est un moyen pratique et rapide de préparer votre repas à l’avance. 
+                    Profitez de cette expérience culinaire personnalisée et sans tracas dès maintenant !”
+                </p>
+                
+                <div class="text-center">
+                    <a href="{{ path('commande_sur_place') }}" class="btn">Commander</a>
+                </div>
+                
+            </div>
+
+        </div>
+    
+    </div>
+
+{% endblock %}

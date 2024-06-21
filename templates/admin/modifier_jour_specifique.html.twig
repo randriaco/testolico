@@ -1,0 +1,91 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Modifier Date Specifique{% endblock %}
+
+{% block body %}
+
+<div class="container">
+
+   <h1>Modifier la date spécifique</h1>
+
+    {# Affichage des messages flash #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {{ form_start(form) }}
+
+        <div class="card mx-auto text-center mb-3" style="width: 300px;">
+
+            <div class="card-header-admin">
+                Date Specifique
+            </div>
+        
+            <div class="card-body mb-3">
+                <p class="card-text">
+                    <strong>Date </strong>  <br>
+                    {{ form_widget(form.date, {'attr': {'class': 'admin-date-input'}}) }} <br>
+                    <hr>
+                    <strong> Ouverture Matin </strong><br>
+                    {{ form_widget(form.ouvertureMatin, {'attr': {'class': 'admin-input'}}) }} <br>
+                    <hr>
+                    <strong> Fermeture Matin </strong><br>
+                    {{ form_widget(form.fermetureMatin, {'attr': {'class': 'admin-input'}}) }} <br>
+                    <hr>
+                    <strong> Ouverture Soir </strong><br>
+                    {{ form_widget(form.ouvertureSoir, {'attr': {'class': 'admin-input'}}) }} <br>
+                    <hr>
+                    <strong> Fermeture Soir </strong><br>
+                    {{ form_widget(form.fermetureSoir, {'attr': {'class': 'admin-input'}}) }} <br>
+                    <hr>
+                    <strong> Status </strong><br>
+                    {{ form_widget(form.status, {'attr': {'class': 'admin-date-input'}}) }} <br>
+                    <hr>
+                    <strong> Motif </strong><br>
+                    {{ form_widget(form.motif, {'attr': {'class': 'admin-motif-input'}}) }} <br>
+                    <hr>
+                </p>
+                <button type="submit" class="btn">Modifier</button>
+                {# Bouton de retour à la page des jours spécifiques #}
+                <a href="{{ path('jour_specifique') }}" class="btn">Retour</a>
+            </div>
+
+        </div>
+
+        {# <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Ouverture Matin</th>
+                    <th>Fermeture Matin</th>
+                    <th>Ouverture Soir</th>
+                    <th>Fermeture Soir</th>
+                    <th>Status</th>
+                    <th>Motif</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ form_widget(form.date) }}</td>
+                    <td>{{ form_widget(form.ouvertureMatin) }}</td>
+                    <td>{{ form_widget(form.fermetureMatin) }}</td>
+                    <td>{{ form_widget(form.ouvertureSoir) }}</td>
+                    <td>{{ form_widget(form.fermetureSoir) }}</td>
+                    <td>{{ form_widget(form.status) }}</td>
+                    <td>{{ form_widget(form.motif) }}</td>
+                    <td>
+                        <button type="submit" class="btn btn-primary">Modifier</button>
+                        <a href="{{ path('jour_specifique') }}" class="btn btn-success">Retour</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table> #}
+
+    {{ form_end(form) }}
+
+</div>
+
+{% endblock %}

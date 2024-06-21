@@ -1,0 +1,26 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}Paiement Échoué{% endblock %}
+
+{% block body %}
+
+    <br><br><br><br>
+
+    <div class="container border rounded-3 mt-4 p-4" style="width:600px;">
+
+        <h1>Paiement Échoué</h1>
+
+        <hr>
+
+        <p>Un problème est survenu lors du traitement de votre paiement. 
+        Veuillez réessayer plus tard ou contacter le support pour plus d'informations.</p>
+
+        <hr>
+
+        <div class="d-flex justify-content-center">
+            <a href="{{ path('commande_emporter') }}" class="btn">liste des Categories</a>
+        </div>
+
+    </div>
+    
+{% endblock %}

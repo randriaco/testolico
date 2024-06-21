@@ -1,0 +1,120 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Date Fermeture{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+    
+        <br>
+
+        <h1 class="text-center">Gestion des Jours de Fermeture</h1>
+
+        {# Affichage des messages flash  #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <br>
+        <div class="titreAdmin mb-5">Ajouter une date de fermeture</div>
+
+        {{ form_start(form) }}
+
+            
+            <div class="card mx-auto text-center mb-3" style="width: 300px;">
+
+                <div class="card-header-admin">
+                    Date Fermeture
+                </div>
+            
+                <div class="card-body mb-3">
+                    <p class="card-text">
+                        <strong>Debut Fermeture </strong>  <br>
+                        {{ form_widget(form.debutFermeture, {'attr': {'class': 'admin-date-input'}}) }} <br>
+                        <hr>
+                        <strong> Fin Fermeture </strong><br>
+                        {{ form_widget(form.finFermeture, {'attr': {'class': 'admin-date-input'}}) }} <br>
+                        <hr>
+                        <strong> Motif </strong><br>
+                        {{ form_widget(form.motif, {'attr': {'class': 'admin-motif-input'}}) }} <br>
+                        <hr>
+                    </p>
+                    <button type="submit" class="btn">Ajouter</button>
+                </div>
+
+            </div>           
+
+        {{ form_end(form) }}
+
+        <br>
+
+        <div class="titreAdmin mb-5">Liste des dates de fermeture</div>
+
+        <div class="row">
+             {% for fermeture in listeFermetures %}
+                <div class="col-md-6">
+
+                    <div class="card mx-auto text-center mb-3" style="width: 300px;">
+
+                        <div class="card-header-admin">
+                            Date Specifique
+                        </div>
+                    
+                        <div class="card-body mb-3">
+                            <p class="card-text">
+                                <strong>Debut Fermeture </strong>  <br>
+                                {{ fermeture.debutFermeture|date('d/m/Y') }} <br>
+                                <hr>
+                                <strong>Fin Fermeture </strong><br>
+                                {{ fermeture.finFermeture|date('d/m/Y') }} <br>
+                                <hr>
+                                <strong> Motif </strong><br>
+                                {{ fermeture.motif }} <br>
+                                <hr>
+                            </p>
+
+                            {# ----------------debut : lien ------------------------------ #}
+                            <a href="{{ path('modifier_jours_multiples', {'id': fermeture.id}) }}" class="bulle">
+                                <i class="fa-solid fa-pen text-primary"></i>
+                                <span class="modifier">Modifier</span>
+                            </a>
+                            &nbsp;
+                            <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="bulle">
+                                <i class="fa-solid fa-trash text-danger"></i>
+                                <span class="annuler">Supprimer</span>
+                            </a>
+                            {# ----------------fin : lien ------------------------------ #}
+                        </div>
+
+                        {# -----------------------------------------debut :  Modal --------------------------------------------- #}
+                        
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Supprimer Date de Fermeture</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Etes-vous sur de supprimer cette date ?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn-modal-non" data-bs-dismiss="modal">Non</button>
+                                    <a href="{{ path('supprimer_jours_multiples', {'id': fermeture.id}) }}" class="btn-modal-oui">Oui</a>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {# ------------------------------------------fin :  Modal --------------------------------------------- #}
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+    
+{% endblock %}

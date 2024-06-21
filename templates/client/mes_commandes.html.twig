@@ -1,0 +1,87 @@
+{% extends 'client.html.twig' %} 
+
+{% block title %}Liste des Commandes{% endblock %}
+
+{% block body %}
+
+	{#  ------------------------------------- Partie : contenu debut-----------------------------------  #}
+
+	<div class="container mt-5">
+
+		<div class="row">
+
+			<div class="col-12">
+			
+				<div id="main-content" class="bg-white border">
+					
+					<h1>Mes Commandes</h1>
+					
+					<section>
+						{#----------------------debut contenu--------------------------#}
+						
+						<div class="row">
+
+							{% for commande in commandes %}
+
+								<div class="card rounded-3 mb-3">									
+									<div class="card-body p-4">
+
+										<div class="row d-flex justify-content-between align-items-center">
+
+											<div class="col-md-3 col-lg-3 col-xl-3">
+												<div class="d-flex justify-content-center align-items-center">
+													<span class="bg-primary text-white fw-bold fs-5 p-2 mb-2 rounded-3 d-flex justify-content-center " style="width:200px;">Date </span>
+												</div>
+												<div class="d-flex justify-content-center align-items-center">
+													<span class="bg-light ms-2 fw-bold fs-5 p-2 mb-2 rounded-3">{{ commande.dateReservation|date('d/m/Y') }}</span>
+												</div>
+											</div>
+
+											<div class="col-md-3 col-lg-3 col-xl-3">
+												<div class="d-flex justify-content-center align-items-center">
+													<span class="d-flex justify-content-center bg-dark text-white fw-bold fs-5 p-2 mb-2 rounded-3" style="width:200px;">Montant </span>
+												</div>	
+												<div class="d-flex justify-content-center align-items-center">
+													<span class="bg-light ms-2 fw-bold fs-5 p-2 mb-2 rounded-3">{{ commande.montant }} €</span>
+												</div>
+											</div>
+
+											<div class="col-md-3 col-lg-3 col-xl-3">
+												<div class="d-flex justify-content-center align-items-center">
+													<span class="bg-info text-white fw-bold fs-5 p-2 mb-2 rounded-3 d-flex justify-content-center " style="width:200px;">Status </span>
+												</div>
+												<div class="d-flex justify-content-center align-items-center">
+													{# <span class="bg-light ms-2 fw-bold fs-5 p-2 mb-2 rounded-3">{{ commande.date|date('d/m/Y') }}</span> #}
+													<span class="bg-light ms-2 fw-bold fs-5 p-2 mb-2 rounded-3">{{ commande.status }}</span>
+												</div>
+											</div>
+
+											<div class="d-flex justify-content-center col-md-3 col-lg-3 col-xl-3">
+												<a href="{{ path('commande_detail', {'id': commande.id}) }}" class="bulle">
+													<i class="fas fa-info-circle fs-2"></i>
+													<span class="modifier">Voir le détail</span>
+												</a>
+											</div>
+
+										</div>
+										
+									</div>									
+								</div>
+
+							{% endfor %}
+
+						</div>
+												
+						{#----------------------fin contenu---------------------------#}
+					</section>
+
+				</div>
+				
+			</div>
+
+		</div>
+	</div>
+	
+	{#  ---------------------------------Partie : contenu fin----------------------------------------  #}
+	
+{% endblock %}

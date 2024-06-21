@@ -1,0 +1,128 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+
+    <h1>Espace Client</h1>
+	
+    <section>
+
+        <div class="container">
+            <div class="row">
+                <div class="mb-3 fondImageLogin">
+                    <h2 class="text-center mt-5 titre">Inscription</h2>
+                </div>
+
+                <div class="col-sm-6 signin">
+
+                    <h2>Nouveau Client</h2>
+
+                    {# Affichage des messages flash  #}
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+
+                    {% for message in app.flashes('error') %}
+                        <div class="alert alert-danger">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+
+                    {# -------------------------------debut --------------------------- #}
+                    
+                    <form class="row g-3" action="" method="post">
+					
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+								<input type="text" class="form-control" id="nom" name="nom" >
+                                <label for="nom"><i class="fa-solid fa-user"></i> Nom</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+								<input type="text" class="form-control" id="prenom" name="prenom" >
+                                <label for="prenom"><i class="fa-solid fa-user"></i> Prénom</label>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <div class="form-floating mb-3">
+								<input type="text" class="form-control" id="telephone" name="telephone" >
+                                <label for="telephone"><i class="fa-solid fa-phone"></i> Portable</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+								<input type="text" class="form-control" id="email" name="email" >
+                                <label for="email"><i class="fa fa-envelope mr-3"></i> Email</label>
+                            </div>
+                            
+                        </div>
+						
+                        <div class="col-md-6">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="confirmEmail"  name="confirmEmail">
+                                <label for="confirmEmail"><i class="fa fa-envelope mr-3"></i> Confirmer Email</label>
+                            </div>
+                        </div>
+
+                        {# ---------------------debut : mdp ----------------------- #}
+                    
+                        <div class="col-md-6">
+							<div class="form-floating mb-3">
+								<input type="password" class="form-control" id="password"  name="password">
+								<label for="password"><i class="fa-solid fa-lock"></i> Mot de passe</label>
+							</div>
+							<input  class="checkbox" type="checkbox" onclick="togglePasswordVisibility('password')"> Afficher Mot de passe
+						</div>
+
+						<div class="col-md-6">
+							<div class="form-floating mb-3">
+								<input type="password" class="form-control" id="confirmPassword"  name="confirmPassword">
+								<label for="confirmPassword"><i class="fa-solid fa-lock"></i> Confirmer Mot de passe</label>
+							</div>
+							<input  class="checkbox" type="checkbox" onclick="togglePasswordVisibility('confirmPassword')"> Afficher Mot de passe
+						</div>
+
+						<div class="col-12 text-center">
+							<button type="submit" class="btn">S inscrire</button>
+						</div>
+										
+					</form>
+
+                    {# ----------------------------fin ---------------------------- #}
+
+                </div>
+                
+            </div>
+        </div>
+		
+    </section>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+
+		function togglePasswordVisibility(inputId) 
+		{
+			var passwordInput = document.getElementById(inputId);
+			if (passwordInput.type === "password") 
+			{
+				passwordInput.type = "text";
+			} 
+			else 
+			{
+				passwordInput.type = "password";
+			}
+		}
+
+	</script>
+
+{% endblock %}

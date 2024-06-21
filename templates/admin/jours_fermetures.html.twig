@@ -1,0 +1,63 @@
+{% extends 'admin.html.twig' %}
+
+{% block body %}
+
+<title>{% block title %}Gestion des jours de fermeture{% endblock %}</title>
+
+<div class="container">
+
+
+    <h1 class="text-center">Gestion des Jours de Fermeture</h1>
+
+    <div class="row">
+
+        <div class="col-6">
+            <div class="card mx-auto text-center mb-3" style="width: 300px;">
+
+                <div class="card-header-admin">
+                    Fermeture une journée
+                </div>
+            
+                <div class="card-body mb-3">
+                    <p class="card-text">
+                        ici le contenu
+                    </p>
+                    <a href="{{ path('jour_specifique') }}" class="btn">
+                        Gérer
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="card mx-auto text-center mb-3" style="width: 300px;">
+
+                <div class="card-header-admin">
+                    Fermeture plusieurs journées
+                </div>
+            
+                <div class="card-body mb-3">
+                    <p class="card-text">
+                        ici le contenu
+                    </p>
+                    <a href="{{ path('jours_multiples') }}" class="btn">
+                        Gérer
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+        
+
+ 
+
+    
+
+    <br>
+
+</div>
+
+{% endblock %}

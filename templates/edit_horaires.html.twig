@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Édition des Horaires{% endblock %}
+
+{% block body %}
+<div class="container">
+
+    <br>
+
+    <h1 class="text-center">Modification des Horaires et Fréquences</h1>
+
+    {# ---- Affichage des messages flash ---- #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+    
+    {{ form_start(form) }}
+
+        {# Affichage du champ de fréquence #}
+        <div>Frequence en minutes :</div>
+        <div class="mb-3">
+            {{ form_widget(form.frequence) }}
+        </div>
+
+        
+
+        {# Affichage du champ pour la date butoir #}
+        <div>Nombre de jours reservables :</div>
+        <div class="mb-3">
+            {{ form_widget(form.dateButoir) }}
+        </div>
+
+        
+
+        <div>Les Horaires Hebdomadaires :</div>
+        <br>
+        {# Tableau des horaires #}
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>Jour</th>
+                    <th>Ouverture Matin</th>
+                    <th>Fermeture Matin</th>
+                    <th>Ouverture Soir</th>
+                    <th>Fermeture Soir</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for jour in ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'] %}
+                    <tr>
+                        <td>{{ jour }}</td>
+                        <td>{{ form_widget(form['ouvertureMatin_' ~ jour]) }}</td>
+                        <td>{{ form_widget(form['fermetureMatin_' ~ jour]) }}</td>
+                        <td>{{ form_widget(form['ouvertureSoir_' ~ jour]) }}</td>
+                        <td>{{ form_widget(form['fermetureSoir_' ~ jour]) }}</td>
+                        <td>{{ form_widget(form['status_' ~ jour]) }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+        
+    {{ form_end(form) }}
+</div>
+{% endblock %}

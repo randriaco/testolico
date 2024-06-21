@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon Compte{% endblock %}
+
+{% block body %}
+
+    <div class="container-fluid">
+    <div class="row">
+        <!-- Partie gauche: Navigation -->
+        <div class="col-md-3">
+            <div class="d-flex flex-column align-items-start py-2 px-3" style="height: 100vh; background-color: #f8f9fa;">
+                <h2 class="h5">Navigation</h2>
+                <div class="nav flex-column">
+                    <a href="" class="nav-link">Mon Compte</a>
+                    <a href="" class="nav-link">Mes Réservations</a>
+                    {# <a href="{{ path('mes_commandes') }}" class="nav-link">Mes Commandes</a> #}
+                    <a href="{{ path('compte', {'onglet': 'mes_commandes'}) }}" class="nav-link">Mes Commandes</a>
+                    <a href="{{ path('app_logout') }}" class="nav-link">Déconnexion</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Partie droite: Contenu Détail -->
+        <div class="col-md-9">
+            <div class="py-4 px-3">
+                {% if onglet == 'mes_commandes' %}
+                    {# {% include 'mes_commandes.html.twig' %} #}
+                    {% include 'mes_commandes.html.twig' with {'commandes': commandes} %}
+                {% else %}
+
+                    <p>Ouverture prochaine, À bientôt.</p>
+                    
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+    
+{% endblock %}

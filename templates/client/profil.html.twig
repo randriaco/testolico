@@ -1,0 +1,195 @@
+{% extends 'client.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+
+	{#  ------------------------------------- Partie : contenu -----------------------------------  #}
+
+	<div class="container mt-5">
+
+		<div class="row">
+
+			<div class="col-12">
+			
+				<div id="main-content" class="bg-white border">
+				
+					<div class="d-flex flex-column">
+						<div class="h5">
+							<div class="far fa-user pt-2 me-3 text-white"></div>
+							{{ user.nom|upper }} {{ user.prenom|capitalize }},
+						</div>
+					</div>
+					
+					<h1>Mon Profil</h1>
+					
+					{% for message in app.flashes('success') %}
+						<div class="alert alert-success">
+							{{ message }}
+						</div>
+					{% endfor %}
+					
+					{% for message in app.flashes('danger') %}
+						<div class="alert alert-danger">
+							{{ message }}
+						</div>
+					{% endfor %}
+					
+					<section>
+
+						<div class="container">
+
+							<div class="row">
+								
+								<div class="col-sm-6 signin">
+
+									<form class="row g-3" action="{{ path('mon_profil') }}" method="post">
+									
+										<div class="col-md-12">
+											<label for="nom" class="form-label">
+												<i class="fa-solid fa-user"></i> Nom
+											</label>
+											<input type="text" class="form-control" id="nom" name="nom" value="{{ user.nom|upper }}">
+										</div>
+										
+										<div class="col-md-12">
+											<label for="prenom" class="form-label">
+											<i class="fa-solid fa-user"></i> Prénom
+											</label>
+											<input type="text" class="form-control" id="prenom" name="prenom" value="{{ user.prenom|capitalize }}">
+										</div>
+
+										<div class="col-12">
+											<label for="telephone" class="form-label">
+												<i class="fa-solid fa-phone"></i> Portable
+											</label>
+											<input type="text" class="form-control" id="telephone" name="telephone" value="{{ user.telephone }}" pattern="^(06|07)\d{8}$" required>
+											<div class="invalid-feedback">
+												Le numéro de téléphone doit commencer par 06 ou 07 et contenir 10 chiffres.
+											</div>
+										</div>
+
+										<div class="col-12 text-center mb-5">
+											<button type="submit" class="btn">Mettre à jour</button>
+										</div>
+										
+									</form>	
+
+										<h2>Mot de passe</h2>
+									
+									<form class="row g-3" action="{{ path('modifier_mot_de_passe') }}" method="post">
+
+										<div class="col-md-12">
+											<label for="currentPassword" class="form-label">
+												<i class="fa-solid fa-lock"></i> Mot de passe actuel
+											</label>
+											<input type="password" class="form-control mb-2" id="currentPassword" name="currentPassword">
+											<input class="checkbox" type="checkbox" onclick="togglePasswordVisibility('currentPassword')">&nbsp &nbsp Afficher Mot de passe
+										</div>
+										
+										<div class="col-md-12">
+											<label for="newPassword" class="form-label">
+												<i class="fa-solid fa-lock"></i> Nouveau Mot de passe
+											</label>
+
+											<input type="password" class="form-control mb-2" id="newPassword" name="newPassword" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" required>
+											<div class="invalid-feedback">
+												Le mot de passe doit contenir au moins 8 caractères, dont au moins une majuscule, une minuscule, un chiffre et un caractère spécial.
+											</div>
+
+											<input class="checkbox" type="checkbox" onclick="togglePasswordVisibility('newPassword')">&nbsp; &nbsp; Afficher Mot de passe
+										</div>
+										
+										<div class="col-md-12">
+											<label for="confirmNewPassword" class="form-label">
+												<i class="fa-solid fa-lock"></i> Confirmer Nouveau Mot de passe
+											</label>
+											<input type="password" class="form-control mb-2" id="confirmNewPassword" name="confirmNewPassword" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$" required>
+											<div class="invalid-feedback">
+												Le mot de passe doit contenir au moins 8 caractères, dont au moins une majuscule, une minuscule, un chiffre et un caractère spécial.
+											</div>
+
+											<input class="checkbox" type="checkbox" onclick="togglePasswordVisibility('confirmNewPassword')">&nbsp; &nbsp; Afficher Mot de passe
+										</div>
+										
+										<div class="col-12 text-center">
+											<button type="submit" class="btn">Modifier</button>
+										</div>
+										
+									</form>
+									
+								</div>
+								
+							</div>
+
+						</div>
+						
+					</section>
+
+				</div>
+				
+			</div>
+
+		</div>
+	</div>
+	
+	{#  --------------------------------- fin contenu ----------------------------------------  #}
+
+{% endblock %}
+
+{% block javascripts %}
+
+	<script>
+		function togglePasswordVisibility(inputId) 
+		{
+			var passwordInput = document.getElementById(inputId);
+			if (passwordInput.type === "password") 
+			{
+				passwordInput.type = "text";
+			} 
+			else 
+			{
+				passwordInput.type = "password";
+			}
+		}
+	</script>
+	
+	<script>
+		document.addEventListener('DOMContentLoaded', function() 
+		{
+			var telephoneInput = document.getElementById('telephone');
+
+			telephoneInput.addEventListener('input', function() 
+			{
+				var isValid = /^(06|07)\d{8}$/.test(this.value);
+				
+				if (!isValid) 
+				{
+					this.classList.add('is-invalid');
+				} 
+				else 
+				{
+					this.classList.remove('is-invalid');
+				}
+			});
+		});
+	</script>
+
+	<script>
+		document.addEventListener('DOMContentLoaded', function () 
+		{
+			var form = document.getElementsByTagName('form')[0];
+
+			form.addEventListener('submit', function (event) 
+			{
+				if (!form.checkValidity()) 
+				{
+					event.preventDefault();
+					event.stopPropagation();
+				}
+				form.classList.add('was-validated');
+			}, false);
+		});	
+	</script>
+		
+{% endblock %}

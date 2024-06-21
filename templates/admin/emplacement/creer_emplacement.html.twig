@@ -1,0 +1,18 @@
+{# templates/emplacement/new.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+	<div class="container">
+		<h1>Ajouter un nouvel Emplacement</h1>
+
+		{{ form_start(form) }}
+			{{ form_widget(form) }}
+			<button class="btn btn-success">Créer</button>
+		{{ form_end(form) }}
+		
+		<a href="{{ path('liste_emplacement') }}" class="btn btn-primary mt-3">Retour à la liste</a>
+	</div>
+
+{% endblock %}

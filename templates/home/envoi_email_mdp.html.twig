@@ -1,0 +1,29 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}Mot de passe oublié{% endblock %}
+
+{% block body %}
+
+    <h1>Email envoyé</h1>
+		
+    <section>
+        <div class="container">
+            <div class="row">
+            
+            
+                <div class="col-sm-6 signin">
+						
+					<p>
+						Un e-mail vient de vous être envoyé contenant un lien que vous pouvez utiliser pour réinitialiser.
+						Ce lien expirera dans {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+					</p>
+
+					<p>Si vous ne recevez pas d e-mail, veuillez vérifier votre dossier spam ou <a href="{{ path('app_forgot_password_request') }}">essayez à nouveau</a>.</p>
+                    
+                </div> 
+
+            </div>
+        </div>		
+    </section>
+
+{% endblock %}

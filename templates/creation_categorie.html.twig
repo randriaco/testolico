@@ -1,0 +1,75 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ajouter Categorie{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+	
+		<div class="mx-auto" style="width: 500px;">
+		
+			<h1 class="text-center mt-5">Ajouter une Categorie</h1>
+
+			{# Affichage des messages flash #}
+			{% for message in app.flashes('success') %}
+				<div class="alert alert-success">
+					{{ message }}
+				</div>
+			{% endfor %}
+
+			{{ form_start(form, {'attr': {'class': 'needs-validation', 'novalidate': ''}}) }}
+
+				{% for field in form %}
+				
+					<div class="mb-3">
+						{{ form_label(field, null, {'label_attr': {'class': 'form-label'}}) }}
+						{# {{ form_widget(field, {'attr': {'class': 'form-control'}}) }} #}
+						{{ form_widget(field, {'attr': {'class': 'form-control', 'style': 'width: 400px;'}}) }}
+
+						{{ form_errors(field, {'attr': {'class': 'invalid-feedback'}}) }}
+					</div>
+				{% endfor %}
+
+				<div class="mb-3">
+					<button type="submit" class="btn btn-primary">Ajouter</button>
+				</div>
+
+			{{ form_end(form) }}
+
+			<br>
+
+			<h2>Liste des Categories</h2>
+
+			<br>
+
+			<table class="table table-bordered text-center">
+			
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Actions</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+
+					{% for categorie in listeCategories %}
+
+						<tr>
+							<td>{{ categorie.nom }}</td>
+							<td>
+								<a href="{{ path('modifier_categorie', {'id': categorie.id}) }}" class="btn btn-primary">Modifier</a>
+							</td>
+						</tr>
+
+					{% endfor %}
+
+				</tbody>
+				
+			</table>
+
+		</div>
+		
+	</div>
+	
+{% endblock %}

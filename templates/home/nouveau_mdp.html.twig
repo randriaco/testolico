@@ -1,0 +1,79 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}Mot de passe oublié{% endblock %}
+
+{% block body %}
+
+    <h1>Nouveau Mot de passe</h1>
+		
+    <section>
+        <div class="container">
+            <div class="row">
+            
+            
+                <div class="col-sm-6 signin">
+						
+						<p>                        
+                            Vous pouvez réinitialiser votre mot de passe en remplissant ce formullaire.                       
+						</p>
+						
+						{{ form_start(resetForm) }}
+						
+							 {# {{ form_row(resetForm.plainPassword) }} #}   
+							
+							<div class="col-md-6 mb-3">
+								<label for="password" class="form-label">
+									<i class="fa-solid fa-lock"></i> Entrer le nouveau mot de passe
+								</label>
+                
+                                <div class="form-group">
+                                    {{ form_widget(resetForm.plainPassword.first, {'attr': {'class': 'form-control', 'id':'newPassvord'}}) }}
+                                </div>
+								<input  class="checkbox" type="checkbox" onclick="togglePasswordVisibility('newPassvord')"> Afficher Mot de passe
+							</div>
+							
+							<div class="col-md-6 mb-3">
+								<label for="password" class="form-label">
+									<i class="fa-solid fa-lock"></i> Confirmer le nouveau mot de passe
+								</label>
+                
+                                <div class="form-group">
+                                    {{ form_widget(resetForm.plainPassword.second, {'attr': {'class': 'form-control', 'id':'confirNewPassvord'}}) }}
+                                </div>
+								<input  class="checkbox" type="checkbox" onclick="togglePasswordVisibility('confirNewPassvord')"> Afficher Mot de passe
+							</div>
+
+							<p class="d-flex justify-content-center">
+                                <button class="btn" type="submit">Valider</button>
+                            </p>
+							
+						{{ form_end(resetForm) }}
+						
+				</div>
+				
+            </div>
+        </div>		
+    </section>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script>
+
+		function togglePasswordVisibility(inputId) 
+		{
+			var passwordInput = document.getElementById(inputId);
+			if (passwordInput.type === "password") 
+			{
+				passwordInput.type = "text";
+			} 
+			else 
+			{
+				passwordInput.type = "password";
+			}
+		}
+
+	</script>
+
+{% endblock %}

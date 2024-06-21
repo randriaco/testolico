@@ -1,0 +1,101 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Horaires - frequence{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <h1>Horaires - Fréquence</h1>
+
+        <div class="titreAdmin mb-5">Fréquence - Nombre Jours Reservables</div>
+
+        {# Affichage des messages flash #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        
+        {{ form_start(form) }}
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mx-auto text-center mb-3" style="width: 300px;">
+
+                        <div class="card-header-admin">
+                            Frequence en minutes
+                        </div>
+                    
+                        <div class="card-body mb-3">
+                            <p class="card-text fw-bold">
+                                Frequence :  {{ form_widget(form.frequence, {'attr': {'class': 'admin-input'}}) }}
+                            </p>
+                            <button type="submit" class="btn">Enregistrer</button>
+                        </div>
+                    
+                    </div>
+                </div>
+
+            
+                <div class="col-md-6">
+                    <div class="card mx-auto text-center" style="width: 300px;">
+
+                        <div class="card-header-admin">
+                            Nombre Jours Reservables
+                        </div>
+                    
+                        <div class="card-body mb-3">
+                            <p class="card-text fw-bold">
+                                Nombre :  {{ form_widget(form.dateButoir, {'attr': {'class': 'admin-input'}}) }}
+                            </p>
+                            <button type="submit" class="btn">Enregistrer</button>
+                        </div>
+                    
+                    </div>
+                </div>
+            </div>
+
+            <div class="titreAdmin">Les Horaires Hebdomadaires</div>
+            <br>
+
+            <div class="row">
+                {% for jour in ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'] %}
+                    <div class="col-md-6">
+                        <div class="card mx-auto mb-5 text-center" style="width: 300px;">
+
+                        <div class="card-header-admin">
+                            {{ jour }}
+                        </div>
+                        
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item fw-bold">
+                                Ouverture Matin : {{ form_widget(form['ouvertureMatin_' ~ jour], {'attr': {'class': 'admin-input'}}) }} <br>
+                                Fermeture Matin : {{ form_widget(form['fermetureMatin_' ~ jour], {'attr': {'class': 'admin-input'}}) }} <br>
+                                <br>
+                            </li>
+                            <li class="list-group-item fw-bold">
+                                Ouverture Soir : {{ form_widget(form['ouvertureSoir_' ~ jour], {'attr': {'class': 'admin-input'}}) }} <br>
+                                Fermeture Soir : {{ form_widget(form['fermetureSoir_' ~ jour], {'attr': {'class': 'admin-input'}}) }} <br>
+                                <br>
+                            </li>
+                            <li class="list-group-item fw-bold">
+                                Status : {{ form_widget(form['status_' ~ jour], {'attr': {'class': 'admin-date-input'}}) }} <br>
+                                <br>
+                            </li>
+                            
+                        </ul>
+
+                        <div class="mb-5">
+                            <button type="submit" class="btn">Enregistrer</button>
+                        </div>
+                        
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            
+        {{ form_end(form) }}
+    </div>
+
+{% endblock %}

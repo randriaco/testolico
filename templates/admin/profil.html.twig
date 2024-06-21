@@ -1,0 +1,215 @@
+{% extends 'admin.html.twig' %} 
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+
+	{# <h1>Profil</h1>
+
+	<hr> #}
+
+	<section>
+	
+		<div class="container">
+		
+			<div class="row">
+				
+				<div class="col-sm-6 signin">
+
+					<h1>Compte Restaurant</h1>
+
+					{# -------------------debut contenu------------------ #}
+					
+					
+					{# Affichage des messages flash #}
+					{% for message in app.flashes('success') %}
+						<div class="alert alert-success">
+							{{ message }}
+						</div>
+					{% endfor %} 
+
+					{% for message in app.flashes('danger') %}
+						<div class="alert alert-danger">
+							{{ message }}
+						</div>
+					{% endfor %}
+					
+					
+						
+						<h2 class="titreResto mt-5 mb-4">Infos Restaurant</h2>
+						
+
+						<form class="row g-3" action="{{ path('admin_profil_restaurant') }}" method="post">
+
+							<div class="col-md-12">
+								<div class="form-floating mb-3">
+									
+									<input type="text" class="form-control" id="nom" name="nom" value="{{ restaurant.nom }}">
+									<label for="nom"><i class="fa-solid fa-utensils"></i> Nom</label>
+								</div>
+							</div>
+
+							<div class="col-md-12">
+								<div class="form-floating mb-3">
+									
+									<input type="text" class="form-control" id="adresse" name="adresse" value="{{ restaurant.adresse }}">
+									<label for="adresse"><i class="fa fa-map-marker"></i> Adresse</label>
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="form-floating mb-3">
+									
+									<input type="text" class="form-control" id="code" name="code" value="{{ restaurant.code }}">
+									<label for="code"><i class="fa fa-map-marker"></i> Code Postal</label>
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="form-floating mb-3">
+									
+									<input type="text" class="form-control" id="ville" name="ville" value="{{ restaurant.ville }}">
+									<label for="ville"><i class="fa fa-map-marker"></i> Ville</label>
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="form-floating mb-3">
+									
+									<input type="text" class="form-control" id="telephone" name="telephone" value="{{ restaurant.telephone }}">
+									<label for="telephone"><i class="fa-solid fa-phone"></i> Télephone</label>
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="form-floating mb-3">
+									
+									<input type="text" class="form-control" id="email" name="email" value="{{ restaurant.email }}">
+									<label for="email"><i class="fa fa-envelope mr-3"></i> Email</label>
+								</div>
+							</div>
+
+							<div class="col-12">
+								<div class="form-floating mb-3">
+									
+									<input type="text" class="form-control" id="site" name="site" value="{{ restaurant.site }}">
+									<label for="site"><i class="fa-brands fa-internet-explorer"></i> Site Web</label>
+								</div>
+							</div>
+
+							<div class="col-12 text-center d-flex justify-content-center">
+								<button type="submit" class="btn">Enregistrer</button>
+							</div>
+							
+						</form>
+
+						<h2 class="titreResto mt-4 mb-4">Infos Pratiques</h2>
+
+						<form class="row g-3" action="{{ path('admin_profil_information') }}" method="post">		
+
+							<div class="col-md-12">
+								<div class="form-floating mb-3">
+									<input type="text" class="form-control" id="message" name="message" value="{{ information.message }}">
+									<label for="message"><i class="fa-solid fa-info"></i> Message</label>
+								</div>
+							</div>
+
+							<div class="col-md-12">
+								<div class="form-floating">
+									<textarea class="form-control" id="description" name="description" >{{ information.description }}</textarea>
+									<label for="description">
+										<i class="fa-solid fa-pen"></i>    Description
+									</label>
+								</div>
+							</div>
+
+							<div class="col-md-12">
+								<div class="form-floating mb-3">
+									<input type="text" class="form-control" id="specialite" name="specialite" value="{{ information.specialite }}">
+									<label for="specialite"><i class="fa-solid fa-burger"></i> Spécialité</label>
+								</div>
+							</div>
+
+							<div class="col-md-6">
+								<div class="form-floating mb-3">
+									<input type="text" class="form-control" id="transport" name="transport" value="{{ information.transport }}">
+									<label for="transport"><i class="fa-solid fa-bus"></i> Transport</label>
+								</div>
+							</div>
+							
+							<div class="col-md-6">
+								<div class="form-floating mb-3">
+									<input type="text" class="form-control" id="parking" name="parking" value="{{ information.parking }}">
+									<label for="parking"><i class="fa-solid fa-square-parking"></i> Parking</label>
+								</div>                                                 
+							</div>
+
+							<div class="col-md-6">
+								<div class="form-floating mb-3">
+									<input type="text" class="form-control" id="langues" name="langues" value="{{ information.langues }}">
+									<label for="langues"><i class="fa-solid fa-language"></i> Langues</label>
+								</div>
+							</div>
+							
+							<div class="col-md-6">
+								<div class="form-floating mb-3">
+									<input type="text" class="form-control" id="paiement" name="paiement" value="{{ information.paiement }}">
+									<label for="paiement"><i class="fa-solid fa-credit-card"></i> Moyen de Paiement</label>
+								</div>                                                 
+							</div>
+
+							<div class="col-12 text-center d-flex justify-content-center">
+								<button type="submit" class="btn">Enregistrer</button>
+							</div>
+							
+						</form>
+					
+						<h2 class="titreResto mt-4 mb-4">Mot de passe</h2> 
+
+						<form class="row g-3" action="{{ path('admin_modifier_mot_de_passe') }}" method="post">	
+							
+							<div class="col-md-12">
+								<div class="form-floating mb-3">
+									<input type="password" class="form-control" id="currentPassword" name="currentPassword">
+									<label for="currentPassword"><i class="fa-solid fa-lock"></i> Mot de passe actuel</label>
+								</div>
+								<input class="checkbox" type="checkbox" onclick="togglePasswordVisibility('currentPassword')">&nbsp; &nbsp; Afficher Mot de passe
+							</div>
+							
+							
+							<div class="col-md-12">
+								<div class="form-floating mb-3">
+									<input type="password" class="form-control" id="newPassword" name="newPassword">
+									<label for="newPassword"><i class="fa-solid fa-lock"></i> Nouveau Mot de passe</label>
+								</div>
+								<input class="checkbox" type="checkbox" onclick="togglePasswordVisibility('newPassword')">&nbsp; &nbsp; Afficher Mot de passe
+							</div>
+							<div class="col-md-12">
+								<div class="form-floating mb-3">
+									<input type="password" class="form-control" id="confirmNewPassword" name="confirmNewPassword">
+									<label for="confirmNewPassword"><i class="fa-solid fa-lock"></i> Confirmer Nouveau Mot de passe</label>
+								</div>
+								<input class="checkbox" type="checkbox" onclick="togglePasswordVisibility('confirmNewPassword')">&nbsp; &nbsp; Afficher Mot de passe 
+							</div>
+										
+							<div class="col-12 text-center d-flex justify-content-center">
+								<button type="submit" class="btn">Modifier</button>
+							</div>
+
+						</form>
+					
+
+					{# ---------------------------fin contenu--------------------	#}
+			</div>
+			
+		</div>
+		
+	</section>
+	
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="{{ asset('js/mdp.js') }}"></script>
+	
+{% endblock %}

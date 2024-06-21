@@ -1,0 +1,142 @@
+{% extends 'admin.html.twig' %}
+
+{% block body %}
+
+<title>{% block title %}Dates Specifiques{% endblock %}</title>
+
+<div class="container">
+
+    <br>
+
+    <h1 class="text-center">Gestion des Jours Spécifiques</h1>
+
+    {# Affichage des messages flash #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class="titreAdmin mb-5">Ajouter une date specifique</div>
+
+    {{ form_start(form) }}
+
+        <div class="card mx-auto text-center mb-3" style="width: 300px;">
+
+            <div class="card-header-admin">
+                Date Specifique
+            </div>
+        
+            <div class="card-body mb-3">
+                <p class="card-text">
+                    <strong>Date </strong>  <br>
+                    {{ form_widget(form.date, {'attr': {'class': 'admin-date-input'}}) }} <br>
+                    <hr>
+                    <strong> Ouverture Matin </strong><br>
+                    {{ form_widget(form.ouvertureMatin, {'attr': {'class': 'admin-input'}}) }} <br>
+                    <hr>
+                    <strong> Fermeture Matin </strong><br>
+                    {{ form_widget(form.fermetureMatin, {'attr': {'class': 'admin-input'}}) }} <br>
+                    <hr>
+                    <strong> Ouverture Soir </strong><br>
+                    {{ form_widget(form.ouvertureSoir, {'attr': {'class': 'admin-input'}}) }} <br>
+                    <hr>
+                    <strong> Fermeture Soir </strong><br>
+                    {{ form_widget(form.fermetureSoir, {'attr': {'class': 'admin-input'}}) }} <br>
+                    <hr>
+                    <strong> Status </strong><br>
+                    {{ form_widget(form.status, {'attr': {'class': 'admin-date-input'}}) }} <br>
+                    <hr>
+                    <strong> Motif </strong><br>
+                    {{ form_widget(form.motif, {'attr': {'class': 'admin-motif-input'}}) }} <br>
+                    <hr>
+                </p>
+                <button type="submit" class="btn">Ajouter</button>
+            </div>
+
+        </div>
+
+    {{ form_end(form) }}
+
+    <div class="titreAdmin mb-5">Liste des jours specifiques</div>
+
+    <br>
+
+    <div class="row">
+        {% for jour in joursSpecifiques %}
+            <div class="col-md-6">
+
+                <div class="card mx-auto text-center mb-3" style="width: 300px;">
+
+                    <div class="card-header-admin">
+                        Date Specifique
+                    </div>
+                
+                    <div class="card-body mb-3">
+                        <p class="card-text">
+                            <strong>Date </strong>  <br>
+                            {{ jour.date|date('d/m/Y') }} <br>
+                            <hr>
+                            <strong> Ouverture Matin </strong><br>
+                            {{ jour.ouvertureMatin|date('H:i') }} <br>
+                            <hr>
+                            <strong> Fermeture Matin </strong><br>
+                            {{ jour.fermetureMatin|date('H:i') }} <br>
+                            <hr>
+                            <strong> Ouverture Soir </strong><br>
+                            {{ jour.ouvertureSoir|date('H:i') }}<br>
+                            <hr>
+                            <strong> Fermeture Soir </strong><br>
+                            {{ jour.fermetureSoir|date('H:i') }} <br>
+                            <hr>
+                            <strong> Status </strong><br>
+                            {{ jour.status }} <br>
+                            <hr>
+                            <strong> Motif </strong><br>
+                            {{ jour.motif }} <br>
+                            <hr>
+                        </p>
+
+                        {# ----------------debut : lien ------------------------------ #}
+                        <a href="{{ path('modifier_jour_specifique', {'id': jour.id}) }}" class="bulle">
+                            <i class="fa-solid fa-pen text-primary"></i>
+                            <span class="modifier">Modifier</span>
+                        </a>
+                        &nbsp;
+                        <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="bulle">
+                            <i class="fa-solid fa-trash text-danger"></i>
+                            <span class="annuler">Supprimer</span>
+                        </a>
+                         {# ----------------fin : lien ------------------------------ #}
+                    </div>
+
+                    {# -----------------------------------------debut :  Modal --------------------------------------------- #}
+                    
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Supprimer Date de Fermeture</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Etes-vous sur de supprimer cette date ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn-modal-non" data-bs-dismiss="modal">Non</button>
+                                <a href="{{ path('supprimer_jour_specifique', {'id': jour.id}) }}" class="btn-modal-oui">Oui</a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {# ------------------------------------------fin :  Modal --------------------------------------------- #}
+                </div>
+
+            </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+
+        <title>{% block title %}Modifier la Place{% endblock %}</title>
+
+        <h1>Modifier la place</h1>
+
+        {# Affichage des messages flash #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Places Total</th>
+                        <th>Places Reservées</th>
+                        <th>Places Liberées</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr>
+                        <td>{{ form_widget(form.date) }}</td>
+                        <td>{{ form_widget(form.placesTotal) }}</td>
+                        <td>{{ form_widget(form.placesReservees) }}</td>
+                        <td>{{ form_widget(form.placesLiberees) }}</td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">Modifier</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        {{ form_end(form) }}
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <title>{% block title %}Gestion Place{% endblock %}</title>
+
+    <div class="container">
+
+        <br>
+
+        <h1 class="text-center">Gestion des Places</h1>
+
+        {# Affichage des messages flash #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <br>
+
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Places Total</th>
+                        <th>Places Reservées</th>
+                        <th>Places Liberées</th>
+                        <th>Places Dispo</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ form_widget(form.date) }}</td>
+                        <td>{{ form_widget(form.placesTotal) }}</td>
+                        <td>{{ form_widget(form.placesReservees) }}</td>
+                        <td>{{ form_widget(form.placesLiberees) }}</td>
+                        <td>{{ form_widget(form.placesDispo) }}</td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">Ajouter</button>                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        {{ form_end(form) }}
+
+        <br>
+
+        <h2>Liste des Places</h2>
+
+        <br>
+
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Places Total</th>
+                    <th>Places Reservées</th>
+                    <th>Places Liberées</th>
+                    <th>Places Dispo</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for place in listePlaces %}
+
+                    <tr>
+                        <td>{{ place.date|date('d/m/Y') }}</td>
+                        <td>{{ place.placesTotal }}</td>
+                        <td>{{ place.placesReservees }}</td>
+                        <td>{{ place.placesLiberees }}</td>
+                        <td>{{ place.placesDispo }}</td>
+                        <td>
+                            <a href="{{ path('modifier_places', {'id': place.id}) }}" class="btn btn-primary">Modifier</a>
+                        </td>
+                    </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+
+{% endblock %}

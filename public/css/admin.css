@@ -1,0 +1,911 @@
+/* ----------------------------------debut css pro w3school--------------------------------- */
+
+body {
+    font-family: "Lato", sans-serif;
+  }
+  
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+  
+  .sidebar a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar a:hover {
+    color: #f1f1f1;
+  }
+  
+  .sidebar .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+  }
+  
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+  }
+  
+  .openbtn:hover {
+    background-color: #444;
+  }
+  
+  #main {
+    transition: margin-left .5s;
+    padding: 16px;
+  }
+  
+  /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+  @media screen and (max-height: 450px) 
+  {
+    .sidebar {padding-top: 15px;}
+    .sidebar a {font-size: 18px;}
+  }
+
+
+/* ---------------------horaires - frequence --------------------- */
+
+.admin-input {
+    width: 150px;
+    padding-left: 50px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.admin-motif-input {
+    width: 250px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.admin-date-input {
+    width: 150px;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.titreAdmin {
+    margin-top: 30px;
+    background-color: #32CD32;
+    color: white;
+    font-family: arial;
+    font-weight: bold;
+    font-size: 20px;
+    padding: 20px;
+    text-align: center;
+}
+
+.card-header-admin {
+    background-color: #32CD32;
+    color: white;
+    font-family: arial;
+    font-size: 20px;
+    padding: 15px;
+}
+
+/* --------------------titre resto ------------------------ */
+.titreResto
+{
+  background-color: #32CD32;
+  border: 1px solid #32CD32; 
+  padding: 15px;
+  font-family: 'arial', cursive;
+  font-size: 20px;
+  font-weight: bold;
+  color:white;
+  
+}
+
+/* ------------------input dans admin - restaurant --------- */
+
+/* .admin-input {
+    width: 200px;
+    margin: auto;
+    padding-left:100px;
+    display: block;
+} */
+
+/* ----------------------logo admin------------------------ */
+
+#logoAdmin a 
+{
+  background-color: white;
+  border-left: none;
+  border-right: none;
+  box-shadow: none;
+  font-family: 'Abril Fatface', cursive;
+  font-size: 25px;
+  font-weight: bold;
+  color:#32CD32;
+  text-decoration: none;
+}
+
+/* ---------------css datepicker --------------------------- */
+
+.datepicker .day.today {
+    font-weight: bold;
+    background-color: #32CD32 !important; /* Couleur verte pour la date d'aujourd'hui */
+    color: white !important;
+}
+
+.datepicker table tr td.today,
+.datepicker table tr td.today:hover,
+.datepicker table tr td.today.disabled,
+.datepicker table tr td.today.disabled:hover {
+    background-color: #32CD32 !important;
+    background-image: none !important;
+    color: white !important;
+}
+
+.datepicker .day.today {
+    font-weight: bold;
+    background-color: #32CD32 !important; /* Couleur verte pour la date d'aujourd'hui */
+    color: white !important;
+}
+
+.datepicker table tr td.today,
+.datepicker table tr td.today:hover,
+.datepicker table tr td.today.disabled,
+.datepicker table tr td.today.disabled:hover {
+    background-color: #32CD32 !important;
+    background-image: none !important;
+    color: white !important;
+}
+
+.datepicker table tr td,
+.datepicker table tr th {
+    border: 1px solid #ddd; /* Couleur de la bordure légère pour ne pas être trop intrusive */
+    padding: 10px; /* Ajustez le padding pour un meilleur visuel */
+}
+
+.datepicker table tr td.active,
+.datepicker table tr td.active:hover {
+    border-color: #32CD32; /* Bordure plus visible pour la date sélectionnée */
+}
+
+/* Change le fond et la couleur du texte des en-têtes des jours dans le datepicker */
+.datepicker .datepicker-days table thead tr th {
+    background-color: #32CD32; /* Couleur de fond verte */
+    /* color: white;  */
+    color: yellow; /* Texte jaune */
+}
+
+
+/* Met en gras les dates du mois en cours */
+.datepicker .datepicker-days table tbody tr td.day:not(.old):not(.new) {
+    font-weight: bold; /* Applique une mise en forme en gras */
+}
+
+
+/* Styliser le switch du datepicker et les flèches en noir */
+.datepicker th.datepicker-switch, .datepicker th.next, .datepicker th.prev {
+    color: black; /* Texte noir */
+    background-color: white; /* Fond blanc */
+    cursor: pointer; /* Ajoute un indicateur de pointeur pour une meilleure UX */
+}
+
+/* Styliser au survol pour changer en texte blanc sur fond noir */
+.datepicker th.datepicker-switch:hover, .datepicker th.next:hover, .datepicker th.prev:hover {
+    color: white; /* Texte blanc */
+    background-color: black; /* Fond noir */
+}
+
+
+
+/* ----------------------------------fin css pro w3school----------------------------------- */
+
+header
+{
+    padding: 10px;
+    box-shadow: 10px 5px 5px gray;
+}
+
+.menu
+{
+    width: 150px;
+    padding: 10px;
+}
+
+.ecriture
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+}
+
+/* -------------------------------contenu---------------------------------------- */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif
+}
+
+body
+{
+    font-family: 'Amiri', serif;
+}
+
+/* ---------------------bouton modal oui et non ------------------------ */
+
+.btn-modal-oui {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    width: 100px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid red;
+    text-decoration: none;
+}
+
+.btn-modal-non {
+    background-color: green;
+    color: white;
+    font-weight: bold;
+    width: 100px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid green;
+    text-decoration: none;
+}
+
+.btn-modal-oui:hover {
+    background-color: red;
+    color: white;
+    font-weight: bold;
+    width: 100px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid red;
+    text-decoration: none;
+}
+
+/* --------------------------admin : info bulle -----------------------------*/
+
+.bulle
+{
+    text-decoration: none;
+    position:relative;
+    /* color:#C800F0; */
+    /* font-family:arial, verdana, sans-serif; */
+    /* text-align:center; */
+}
+
+.bulle span 
+{
+    display: none;   
+}
+
+.bulle:hover span 
+{
+    display: block;
+    position: absolute;
+    top: -40px; 
+    left: 0px; 
+    font-family:arial, verdana, sans-serif;
+    text-align:center;
+    font-size:17px;
+    color:white;
+    font-weight: bold;
+    width:200px;
+    background: #32CD32;
+    padding: 5px;
+    border: thick double 1px white ;
+    border-radius: 15px;
+    text-indent: 0;
+}
+
+/* ----------------------------info bulle ----------------------------------- */
+
+section a
+{
+    text-decoration: none;
+    
+}
+
+section .bulle
+{
+    text-decoration: none;
+    position:relative;
+    /* color:#C800F0; */
+    /* font-family:arial, verdana, sans-serif; */
+    /* text-align:center; */
+}
+
+section .bulle span 
+{
+    display: none;   
+}
+
+section .bulle:hover span 
+{
+    display: block;
+    position: absolute;
+    top: -40px; 
+    left: 0px; 
+    font-family:arial, verdana, sans-serif;
+    text-align:center;
+    font-size:17px;
+    color:white;
+    /* font-weight:bold; */
+    width:200px;
+    background: blue;
+    padding: 5px;
+    border: thick double 1px white ;
+    border-radius: 15px;
+    text-indent: 0;
+}
+
+/* ----------------------------------- nav -------------------------------------- */
+
+nav 
+{
+    min-height: 70px;
+    box-shadow: 10px 5px 5px gray;
+}
+
+.btn-group
+{
+    text-align: center;
+}
+
+nav .navbar-brand .logo {
+    padding: 10px 15px;
+    border-radius: 8px
+}
+
+nav .navbar-brand .logo .h2 {
+    margin: 0
+}
+
+nav .navbar-brand .h4 {
+    margin-bottom: 0px;
+    font-weight: 900
+}
+
+nav .navbar-brand .fs-6 {
+    font-size: 0.88rem !important
+}
+
+/* nav ul li {
+    padding: 0 20px
+} */
+
+nav ul li 
+{
+    background-color: #32CD32;
+    color: white; 
+    box-shadow: 10px 5px 5px grey;
+    font-size: 16px;
+    margin: 10px;
+    padding: 5px;
+    text-align: center;
+    border-radius: 25px;
+    width: 200px;
+}
+
+nav ul li a .cart {
+    padding: 4px 6px;
+    border-radius: 6px;
+    position: relative;
+    display: inline
+}
+
+nav ul li a .cart::after {
+    position: absolute;
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ff5252;
+    top: -1px
+}
+
+.fond
+{
+    background-color: #32CD32;
+    color: white; 
+    margin: 15px;
+    padding: 10px;
+    border-radius: 15px;
+}
+
+/* ------------------------------- navbar --------------------------------- */
+
+.navbar-light .navbar-nav .nav-link 
+{
+    color: yellow;
+    font-weight: 600;
+    /* color: #333 */
+}
+
+.navbar-light .navbar-nav .nav-link:hover 
+{
+    color: white;
+    /* color: #4e2296 */
+}
+
+.navbar-light .navbar-nav .nav-link.active 
+{
+    color: #451296
+}
+
+.navbar-toggler:focus 
+{
+    box-shadow: none
+}
+
+/* -------------------------------- sidebar ------------------------------- */
+
+#sidebar {
+    padding: 15px 0px 15px 0px;
+    border-radius: 10px;
+    border: 1px solid gray;
+    background-color: white;
+    /* color: black; */
+}
+
+#sidebar .h4 {
+    font-weight: 400;
+    padding: 15px;
+    background-color: #32CD32;
+    color: yellow;
+    text-align: center;
+}
+
+#sidebar a:hover 
+{
+    background-color: #32CD32;
+    color: white;
+    border-left: 10px solid yellow;
+    border-right: 10px solid yellow;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;  
+    font-weight: bold;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+#sidebar ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 0rem
+}
+
+#sidebar ul li 
+{
+    padding: 10px 0;
+    display: block;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-left: 5px solid transparent
+}
+
+#sidebar ul li.active {
+    border-left: 5px solid yellow;
+    background-color: red
+}
+
+#sidebar ul li a {
+    display: block
+}
+
+#sidebar ul li a .fas,
+#sidebar ul li a .far 
+{
+    /* color: yellow; */
+    /* color: #ddd; */
+    color: #32CD32;
+    font-weight: bolder;
+}
+
+#sidebar ul li a .link 
+{
+    color: black;
+    /* color: #fff; */
+    font-weight: 500
+}
+
+#sidebar ul li a .link-desc {
+    font-size: 0.8rem;
+    color: black;
+    /* color: #ddd */
+}
+
+/* ----------------------------partie droite - main-content --------------------------------- */
+
+h1
+{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    font-family: 'Abril Fatface', cursive;
+    font-size: 40px;
+    font-weight: bold;
+    color: black;    
+    text-align: center;
+}
+
+h2
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    font-family: 'Abril Fatface', cursive;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+}
+
+input
+{
+  width: 400px;
+  box-shadow: 10px 5px 5px gray;
+  border: 1px solid whitesmoke;
+}
+
+.checkbox
+{
+  width: 15px;
+  /* height: 15px; */
+  /* box-shadow: 10px 5px 5px gray; */
+  border: 1px solid whitesmoke;
+}
+
+textarea .form-control
+{
+    box-shadow: 10px 5px 5px gray;
+}
+
+#floatingTextarea
+{
+    height: 220px;
+    box-shadow: 10px 5px 5px gray;
+}
+
+.fa
+{
+  color: #32CD32;
+}
+
+.fas
+{
+  color: #32CD32;
+}
+
+.fa-brands
+{
+  color: #32CD32;
+}
+
+.fa-solid
+{
+  color: #32CD32;
+}
+
+#checkbox
+{
+  box-shadow: none;
+  border: none;
+  text-align: left;
+  width: 20px;
+}
+
+.signin 
+{
+  background-color: white;
+  padding: 3Opx;
+  margin: auto;
+  height: auto;
+}
+
+.btn
+{
+  margin-top: 30px;
+  background-color: #32CD32;
+  color: yellow;
+  border-radius: 10px;
+  border: thick double white;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;  
+  font-weight: bold;
+  padding: 10px;
+  width: 250px;
+  box-shadow: 10px 5px 5px gray;
+}
+
+.btn:hover
+{
+  margin-top: 30px;
+  background-color: #32CD32;
+  color: white;
+  border-radius: 10px;
+  border: thick double white;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;  
+  font-weight: bold;
+  padding: 10px;
+  width: 250px;
+  box-shadow: 10px 5px 5px gray;
+}
+
+
+#main-content {
+    padding: 30px;
+    border-radius: 15px
+}
+
+#main-content .h5 
+{
+    background-color: #32CD32;
+    color: yellow;
+    padding: 20px;
+    font-weight: 600;
+    margin-bottom: 0
+}
+
+
+#main-content .h5,
+#main-content .text-uppercase {
+    font-weight: 600;
+    margin-bottom: 0
+}
+
+#main-content .h5+div {
+    font-size: 0.9rem
+}
+
+#main-content .box {
+    padding: 10px;
+    border-radius: 6px;
+    width: 170px;
+    height: 90px
+}
+
+#main-content .box img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain
+}
+
+#main-content .box .tag {
+    font-size: 0.9rem;
+    color: #000;
+    font-weight: 500
+}
+
+#main-content .box .number {
+    font-size: 1.5rem;
+    font-weight: 600
+}
+
+.order {
+    padding: 10px 30px;
+    min-height: 150px
+}
+
+.order .order-summary {
+    height: 100%
+}
+
+.order .blue-label {
+    background-color: #aeaeeb;
+    color: #0046dd;
+    font-size: 0.9rem;
+    padding: 0px 3px
+}
+
+.order .green-label {
+    background-color: #a8e9d0;
+    color: #008357;
+    font-size: 0.9rem;
+    padding: 0px 3px
+}
+
+.order .fs-8 {
+    font-size: 0.85rem
+}
+
+.order .rating img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain
+}
+
+.order .rating .fas,
+.order .rating .far {
+    font-size: 0.9rem
+}
+
+.order .rating .fas {
+    color: #daa520
+}
+
+.order .status {
+    font-weight: 600
+}
+
+.order .btn.btn-primary {
+    background-color: #fff;
+    color: #4e2296;
+    border: 1px solid #4e2296
+}
+
+.order .btn.btn-primary:hover {
+    background-color: #4e2296;
+    color: #fff
+}
+
+.order .progressbar-track {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    position: relative
+}
+
+.order .progressbar-track .progressbar {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 0rem
+}
+
+.order .progressbar-track .progressbar li {
+    font-size: 1.5rem;
+    border: 1px solid #333;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background-color: #dddddd;
+    z-index: 100;
+    position: relative
+}
+
+.order .progressbar-track .progressbar li.green {
+    border: 1px solid #007965;
+    background-color: #d5e6e2
+}
+
+.order .progressbar-track .progressbar li::after {
+    position: absolute;
+    font-size: 0.9rem;
+    top: 50px;
+    left: 0px
+}
+
+#tracker {
+    position: absolute;
+    border-top: 1px solid #bbb;
+    width: 100%;
+    top: 25px
+}
+
+#step-1::after {
+    content: 'Placed'
+}
+
+#step-2::after {
+    content: 'Accepted';
+    left: -10px
+}
+
+#step-3::after {
+    content: 'Packed'
+}
+
+#step-4::after {
+    content: 'Shipped'
+}
+
+#step-5::after {
+    content: 'Delivered';
+    left: -10px
+}
+
+.bg-purple {
+    background-color: #55009b
+}
+
+.bg-light {
+    background-color: #f0ecec !important
+}
+
+.green {
+    color: #007965 !important
+}
+
+/* ----------------------- partie media ------------------------ */
+/* 
+@media(max-width: 1199.5px) {
+    nav ul li {
+        padding: 0 10px
+    }
+}
+
+@media(max-width: 500px) {
+    .order .progressbar-track .progressbar li {
+        font-size: 1rem
+    }
+
+    .order .progressbar-track .progressbar li::after {
+        font-size: 0.8rem;
+        top: 35px
+    }
+
+    #tracker {
+        top: 20px
+    }
+}
+
+@media(max-width: 440px) {
+    #main-content {
+        padding: 20px
+    }
+
+    .order {
+        padding: 20px
+    }
+
+    #step-4::after {
+        left: -5px
+    }
+} */
+
+/* @media(max-width: 395px) {
+    .order .progressbar-track .progressbar li {
+        font-size: 0.8rem
+    }
+
+    .order .progressbar-track .progressbar li::after {
+        font-size: 0.7rem;
+        top: 35px
+    }
+
+    #tracker {
+        top: 15px
+    }
+
+    .order .btn.btn-primary {
+        font-size: 0.85rem
+    }
+}
+
+@media(max-width: 355px) {
+    #main-content {
+        padding: 15px
+    }
+
+    .order {
+        padding: 10px
+    }
+} */

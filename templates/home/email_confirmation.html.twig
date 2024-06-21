@@ -1,0 +1,20 @@
+{% extends 'email.html.twig' %}
+
+{% block body %} 
+
+    <p>Bonjour {{ nom | escape }},</p>
+
+    <p>Nous vous remercions d'avoir pris le temps de nous écrire. Votre message a bien été reçu.</p>
+    <p>Nous faisons tout notre possible pour répondre à chaque demande dans les meilleurs délais. Vous pouvez vous attendre à recevoir une réponse de notre part dans un délai de 24 à 48 heures.</p>
+    <p>En attendant, n'hésitez pas à parcourir notre <a href="https://www.votre-site.com" class="btn btn-success">site web</a> pour plus d'informations sur nos services.</p>
+    <p>Cordialement,</p>
+
+    <p>L'équipe de RESTOLICO.</p>
+
+{% endblock %}
+		
+
+
+        
+
+       

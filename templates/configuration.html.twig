@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Configuration{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+
+		<h1 class="text-center">Determiner le nombre total de Places</h1> 
+
+        {# Affichage des messages flash #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <br>
+
+        <div class="mx-auto"  style="width: 200px;">
+
+            {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+                        
+                <div class="mb-3">Nombre Total de Places : </div>
+                
+                {{ form_widget(form.placesTotal) }}
+
+                <br>
+                
+                <div class="mt-3 text-center">
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                </div>
+                                
+            {{ form_end(form) }}
+
+        </div>
+
+        
+
+	</div>
+
+{% endblock %}

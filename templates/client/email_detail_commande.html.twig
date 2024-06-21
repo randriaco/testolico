@@ -1,0 +1,50 @@
+{% extends 'email.html.twig' %}
+
+{% block body %} 
+
+    <h1>Récapitulatifs</h1>
+
+    <p>Merci d'avoir passé votre commande avec nous. Voici les détails de votre commande :</p>
+
+    <h3>Détail de votre Réservation :</h3>
+
+    <div class="border rounded-3 p-3 mt-3 mb-3 text-start">
+        <strong>Date de réservation :</strong> {{ dateReservation }}<br>
+        <strong>Horaire de réservation :</strong> {{ horaireReservation }}<br>
+        <strong>Nombre de couverts :</strong> {{ nombreCouverts }}<br>
+    </div>
+
+    <h3>Détail de votre Commande :</h3>
+    <br>
+    <table class="table table-striped  table-bordered text-center mb-3">
+        <thead class="bg-secondary text-white">
+            <tr>
+                <th>Produit</th>
+                <th>Prix Unit.</th>
+                <th>Quantité</th>
+                <th>Montant</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in contenuPanier %}
+                {% set produit = item.produit %}
+                {% set quantite = item.quantite %}
+                {% set prix = produit.getPrix %}
+                {% set montant = prix * quantite %}
+                <tr>
+                    <td>{{ produit.getNom }}</td>
+                    <td>{{ prix }} €</td>
+                    <td>{{ quantite }}</td>
+                    <td>{{ montant }} €</td>
+                </tr>
+            {% endfor %}
+            <tr>
+                <td colspan="3"><strong>Total Commande</strong></td>
+                <td><strong>{{ totalCommande }} €</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p>Si vous avez des questions concernant votre commande, n'hésitez pas à nous contacter.</p>
+
+{% endblock %}

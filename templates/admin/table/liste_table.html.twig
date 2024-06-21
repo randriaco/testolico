@@ -1,0 +1,41 @@
+{# templates/table/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>Liste des Tables</h1>
+
+        <a href="{{ path('creer_table') }}" class="btn btn-primary mb-3">Ajouter une nouvelle Table</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Emplacement</th>
+                    <th>Nombre de Chaises</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for table in tables %}
+                    <tr>
+                        <td>{{ table.id }}</td>
+                        <td>{{ table.nom }}</td>
+                        <td>{{ table.emplacement ? table.emplacement.nom : 'Aucun' }}</td>
+                        <td>{{ table.nombreChaise }}</td>
+                        <td>
+                            <a href="{{ path('detail_table', {'id': table.id}) }}" class="btn btn-info btn-sm">Voir</a>
+                            <a href="{{ path('modifier_table', {'id': table.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                            <form method="post" action="{{ path('supprimer_table', {'id': table.id}) }}" style="display: inline-block;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette table ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ table.id) }}">
+                                <button class="btn btn-danger btn-sm">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

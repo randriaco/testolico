@@ -1,0 +1,79 @@
+{% extends 'client.html.twig' %}
+
+{% block title %}Détail de la commande{% endblock %}
+
+{% block body %}
+
+	{#  ------------------------------------- Partie : contenu -----------------------------------  #}
+
+	<div class="container mt-5">
+
+		<div class="row">
+
+			<div class="col-12">
+			
+				<div id="main-content" class="bg-white border">
+					
+					<h1>Détail de la commande</h1>
+					
+					<section>
+						{#----------------------debut contenu---------------------------#}
+						
+						<div class="row">
+							<div class="card rounded-3 mb-3 mx-auto" style="width:600px;">
+							
+								<div class="card-body p-4">
+
+									{#----------------------debut partie à afficher---------------------------#}
+
+									<div class="d-flex align-items-center">
+										<span class="bg-primary text-white fw-bold fs-5 p-2 mb-2 rounded-3" style="width:200px;">Date </span>
+										<span class="bg-light ms-2 fw-bold fs-5 p-2 mb-2 rounded-3">{{ commande.dateReservation|date('d/m/Y') }}</span>
+									</div>
+
+									<div class="d-flex align-items-center">
+										<span class="bg-dark text-white fw-bold fs-5 p-2 mb-2 rounded-3" style="width:200px;">Montant </span>
+										<span class="bg-light ms-2 fw-bold fs-5 p-2 mb-2 rounded-3">{{ commande.montant }} €</span>
+									</div>
+
+									<div class="d-flex align-items-center">
+										<span class="bg-info text-white fw-bold fs-5 p-2 mb-2 rounded-3" style="width:200px;">Status </span>
+										<span class="bg-light ms-2 fw-bold fs-5 p-2 mb-2 rounded-3">{{ commande.status }}</span>
+									</div>
+
+									{% for commandeProduit in commande.getCommandeProduits %}
+									<div class="d-flex align-items-center">
+										
+											<span class="bg-warning text-white fw-bold fs-5 p-2 mb-2 rounded-3" style="width:200px;">{{ commandeProduit.quantite }} x {{ commandeProduit.produit.nom }} </span>
+											<span class="bg-light ms-2 fw-bold fs-5 p-2 mb-2 rounded-3">
+												({{ commandeProduit.quantite }} x {{ commandeProduit.produit.prix }} = {{ commandeProduit.quantite * commandeProduit.produit.prix }} €)
+											</span>
+										
+									</div>
+									{% endfor %}
+
+									<div class="d-flex justify-content-center align-items-center">
+										<a href="{{ path('mes_commandes') }}" class="btn">Retour</a>
+									</div>
+
+									{#----------------------fin partie à afficher---------------------------#}
+									
+								</div>
+								
+							</div>
+							
+						</div>
+						
+						{#----------------------fin contenu---------------------------#}
+					</section>
+
+				</div>
+				
+			</div>
+
+		</div>
+	</div>
+	
+	{#  --------------------------------- fin contenu ----------------------------------------  #}
+
+{% endblock %}

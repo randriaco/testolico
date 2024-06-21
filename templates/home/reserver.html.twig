@@ -1,0 +1,209 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}Calendrier de Réservation{% endblock %}
+
+{% block body %}
+
+	<form action="{{ path('confirmation_reservation') }}" method="post" data-turbo="false">
+
+		<br><br><br>
+		
+		<div class="container mt-4 mb-4 border rounded-3 p-4 " style="max-width: 800px;">
+
+			<br>
+
+			{# Affichage des messages flash #}
+			{% for message in app.flashes('danger') %}
+				<div class="alert alert-danger">
+					{{ message }}
+				</div>
+			{% endfor %}
+			
+			{# -------------------------debut : entete calendrier semaine pre et suiv --------------------------------- #}
+
+			{% include 'partials/entete_calendrier.html.twig'  %}	
+
+			{# --------------- ---------debut : test--------------------------------- #}
+
+			<div class="d-flex flex-column align-items-center">
+	
+				{% set semaineActuellementAffichee = debutSemaine|date('o-W') %}
+				{% set semaineActuelle = "now"|date('o-W') %}
+				
+				{% set aujourdHui = "now"|date('Y-m-d') %}
+				{% set heureActuelle = "now"|date('H:i') %}
+				
+				{% for jour, date in dates %}
+
+					{# ------on affiche seulement les jours superieurs à la date d'aujourd'hui---- #}
+					{% if date|date('Y-m-d') >= aujourdHui %}
+
+						{# centrer card au milieu avec mx-auto #}
+						<div class="card mb-3 mx-auto" style="width: 300px;">
+							<div class="card-body">
+
+								<h5 class="card-title">{{ jour }} {{ date|date('d/m/Y') }}</h5>
+								
+								<div class="d-flex justify-content-center mt-4">
+								
+									{% set dateCreneau = date|date('Y-m-d') %}
+									{% set estJourActuel = dateCreneau == aujourdHui %}
+									{% set estAvantAujourdhui = dateCreneau < aujourdHui %}
+									
+									{% set estDansSemaineActuelle = semaineActuellementAffichee == semaineActuelle %}
+									
+									{# ----------------------------------filtre date butoir------------------------------------ #}
+									{% set jourSpecifique = joursSpecifiquesFiltres|filter(jour => jour.getDate()|date('Y-m-d') == dateCreneau)|first %}
+									{% set creneauxDuJour = creneauxFiltres[jour] ?? null %}
+
+									{# ----------------affichage des horaires -------------------------- #}
+									
+									{% if jourSpecifique %}
+									
+										{% include 'partials/jour_specifique.html.twig'  %}								
+									
+									{% else %}
+									
+										{% include 'partials/horaires_reguliers.html.twig' %}
+																	
+									{% endif %}
+											
+								</div>
+								
+							</div>
+						</div>
+
+					{% endif %}
+
+				{% endfor %}
+
+			</div>
+
+			{# -------affichage nombre place dispo à cette date------- #}
+			<div class="border rounded-3 p-4 text-center bg-light mb-3">
+				<b><div id="placesDispoMessage"></div></b>
+			</div>
+			
+			{# ------------------affichage date et horaire----------------------------- #}
+			<div class="border rounded-3 p-4 text-center bg-light mb-3">
+				<div id="dateMessage" class="alert alert-success text-center" style="display: none;"></div>
+			</div>
+
+			{# ------------------affichage nombre couvert----------------------------- #}
+			<div id="nombreCouvertsSection" class="mb-3 border rounded-3 p-2 text-center" style="display: none;"> 
+
+				<h5 class="text-center  m-4 p-4">Déterminer le nombre de Couvert</h5> 
+
+				<div class="d-flex justify-content-center">
+					<label for="nombreCouverts" class="form-label"></label>
+					<select class="form-select" id="nombreCouverts"  name="nombreCouverts" style="width: 100px;">
+						{% for i in 1..20 %}
+							<option value="{{ i }}">{{ i }}</option>
+						{% endfor %}
+					</select>
+				</div>
+
+			</div>
+				
+			{# ------------------bouton confirmer et valider reservation---------------- #}
+			<div id="reserverButtonSection">
+
+					<div class="d-flex justify-content-center mt-2 mb-2">
+						<button type="submit" class="btn" style="display: none;" id="confirmButton">Réserver</button>
+					</div>		
+			</div>
+
+			<br>
+				
+		</div>
+
+	</form>
+
+{% endblock %}
+
+{% block javascripts %}
+
+	<script>
+		document.querySelectorAll('.creneau-radio').forEach(function(radio) 
+		{
+			radio.addEventListener('change', function() 
+			{
+				const selectedDate = this.getAttribute('data-date');
+				const selectedTime = this.getAttribute('data-time');
+
+				// Appliquez la fonction formatDate pour convertir la date
+				const formattedDate = formatDate(selectedDate);
+
+				document.getElementById('dateMessage').textContent = 'Vous avez choisi le ' + formattedDate + ' à ' + selectedTime + ', il vous reste à choisir le nombre de couverts et à confirmer votre reservation.';
+				// document.getElementById('dateMessage').textContent = 'Vous avez choisi le ' + selectedDate + ' à ' + selectedTime;
+				document.getElementById('dateMessage').style.display = 'block';
+				document.getElementById('nombreCouvertsSection').style.display = 'block';
+				document.getElementById('confirmButton').style.display = 'block';
+				
+				// Scroll to the "nombreCouvertsSection"
+				// document.getElementById('nombreCouvertsSection').scrollIntoView({ behavior: 'smooth' });
+				document.getElementById('placesDispoMessage').scrollIntoView({ behavior: 'smooth' });
+			});
+		});
+	</script>
+
+	<script>
+		document.querySelectorAll('input[name="creneau"]').forEach(function(radio) 
+		{
+			radio.addEventListener('change', function() {
+				var selectedDate = this.getAttribute('data-date');
+				fetchPlacesDispo(selectedDate);
+			});
+		});
+
+		function formatDate(dateString) 
+		{
+			const dateParts = dateString.split("-"); // Sépare la chaîne de date en un tableau [YYYY, MM, DD]
+			return `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`; // Réarrange les parties pour le format DD/MM/YYYY
+		}
+
+
+		function fetchPlacesDispo(date) 
+		{
+			fetch('https://127.0.0.1:8000/fetch-places-dispo?date=' + date)
+			.then(response => response.json())
+			.then(data => 
+			{
+				const placesDispo = data.placesDispo; // Assurez-vous d'utiliser cette variable pour vérifier le nombre de places disponibles
+				
+				// Formate la date du format YYYY-MM-DD au format DD/MM/YYYY
+				const formattedDate = formatDate(date);
+
+				// Déterminer la couleur du message en fonction du nombre de places disponibles
+        		const messageColor = placesDispo > 0 ? 'green' : 'red';
+
+				// Construire le message AVEC la date formatée
+				var message = `Pour la date du : ${formattedDate}, il y a ${data.placesDispo} place(s) disponible(s).`;
+				document.getElementById('placesDispoMessage').textContent = message;
+
+				const placesDispoMessageElement = document.getElementById('placesDispoMessage');
+				placesDispoMessageElement.style.color = messageColor; // Appliquer la couleur
+
+				// Récupère les éléments de l'interface à masquer ou afficher
+				const nombreCouvertsSection = document.getElementById('nombreCouvertsSection');
+				const reserverButtonSection = document.getElementById('reserverButtonSection');
+
+				if (placesDispo > 0) 
+				{
+					// Si des places sont disponibles, afficher la section de sélection du nombre de couverts et le bouton de réservation
+					if (nombreCouvertsSection) nombreCouvertsSection.style.display = '';
+					if (reserverButtonSection) reserverButtonSection.style.display = '';
+				} 
+				else 
+				{
+					// Si aucune place n'est disponible, masquer la section de sélection du nombre de couverts et le bouton de réservation
+					if (nombreCouvertsSection) nombreCouvertsSection.style.display = 'none';
+					if (reserverButtonSection) reserverButtonSection.style.display = 'none';
+				}
+
+			})
+			.catch(error => console.error('Erreur:', error));
+		}
+	</script>
+	
+{% endblock %}

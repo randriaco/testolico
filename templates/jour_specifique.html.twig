@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<title>{% block title %}Date Specifique{% endblock %}</title>
+
+<div class="container">
+
+    <br>
+
+    <h1 class="text-center">Gestion des Jours Spécifiques</h1>
+
+    <br>
+
+    {# Affichage des messages flash #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Ouverture Matin</th>
+                    <th>Fermeture Matin</th>
+                    <th>Ouverture Soir</th>
+                    <th>Fermeture Soir</th>
+                    <th>Status</th>
+                    <th>Motif</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ form_widget(form.date) }}</td>
+                    <td>{{ form_widget(form.ouvertureMatin) }}</td>
+                    <td>{{ form_widget(form.fermetureMatin) }}</td>
+                    <td>{{ form_widget(form.ouvertureSoir) }}</td>
+                    <td>{{ form_widget(form.fermetureSoir) }}</td>
+                    <td>{{ form_widget(form.status) }}</td>
+                    <td>{{ form_widget(form.motif) }}</td>
+                    <td>
+                        <button type="submit" class="btn btn-primary">Ajouter</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    {{ form_end(form) }}
+
+    <br>
+
+    <h2>Liste des Jours Spécifiques</h2>
+
+    <br>
+
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Ouverture Matin</th>
+                <th>Fermeture Matin</th>
+                <th>Ouverture Soir</th>
+                <th>Fermeture Soir</th>
+                <th>Status</th>
+                <th>Motif</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for jour in joursSpecifiques %}
+                <tr>
+                    <td>{{ jour.date|date('d/m/Y') }}</td>
+                    <td>{{ jour.ouvertureMatin|date('H:i') }}</td>
+                    <td>{{ jour.fermetureMatin|date('H:i') }}</td>
+                    <td>{{ jour.ouvertureSoir|date('H:i') }}</td>
+                    <td>{{ jour.fermetureSoir|date('H:i') }}</td>
+                    <td>{{ jour.status }}</td>
+                    <td>{{ jour.motif }}</td>
+                    <td>
+                        <a href="{{ path('edit_jour_specifique', {'id': jour.id}) }}" class="btn btn-primary">Modifier</a>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            Supprimer
+                        </button>
+                    </td>
+                </tr>
+
+                {# ------------------------------------------debut :  Modal --------------------------------------------- #}
+                    
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Supprimer Date de Fermeture</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Etes-vous sur de supprimer cette date ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Non</button>
+                                <a href="{{ path('delete_jour_specifique', {'id': jour.id}) }}" class="btn btn-danger">Oui</a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {# ------------------------------------------fin :  Modal --------------------------------------------- #}
+
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+
+{% endblock %}

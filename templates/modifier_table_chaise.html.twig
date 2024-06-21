@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+
+        <title>{% block title %}Modifier Table Chaise{% endblock %}</title>
+
+        <br>
+
+        <h1 class="text-center">Modifier la Table et la Chaise</h1>
+
+        <br>
+
+        {# Affichage des messages flash #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Numero Table</th>
+                        <th>Nombre Chaise</th>
+                        <th>Emplacement</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ form_widget(form.numeroTable) }}</td>
+                        <td>{{ form_widget(form.nombreChaise) }}</td>
+                        <td>{{ form_widget(form.emplacement) }}</td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">Modifier</button>
+                            {# Bouton de retour à la page des jours spécifiques #}
+                            <a href="{{ path('creer_table_chaise') }}" class="btn btn-success">Retour</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        {{ form_end(form) }}
+
+    </div>
+
+{% endblock %}

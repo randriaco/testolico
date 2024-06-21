@@ -1,0 +1,46 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}Mot de passe oublié{% endblock %}
+
+{% block body %}
+
+    <h1>Reinitialisation Mot de passe</h1>
+		
+    <section>
+        <div class="container">
+            <div class="row">
+            
+                <div class="col-sm-6 signin">
+						
+						<p>                        
+                            Saisissez votre adresse électronique et 
+                            nous vous enverrons un lien pour réinitialiser votre mot de passe.                       
+						</p>
+
+						{{ form_start(requestForm) }}
+													
+							<div class="col-md-6">
+								<label for="email" class="form-label">
+									<i class="fa fa-envelope"></i> Email
+								</label>
+                
+                                <div class="form-group">
+                                    {{ form_widget(requestForm.email, {'attr': {'class': 'form-control'}}) }}
+                                </div>
+
+
+							</div>
+                    
+
+							<p class="d-flex justify-content-center">
+                                <button class="btn" type="submit">Valider</button>
+                            </p>
+							
+						{{ form_end(requestForm) }}
+                </div> 
+
+            </div>
+        </div>		
+    </section>
+
+{% endblock %}

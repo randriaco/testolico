@@ -1,0 +1,132 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}Nous Contacter{% endblock %}
+
+{% block body %}
+
+    <h1>Nous Contacter</h1>
+
+    {# Affichage des messages flash #}
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success" style="width:400px; margin: 20px auto;text-align: center;">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <section>
+
+        <div class="container mt-xl-5 mb-5 ">
+
+            <section class="bg-primary mb-5 fondImageContact1">
+                <div class="d-flex justify-content-center pt-5">
+                    <h2 class="font-weight-bold text-black">Nous Ecrire</h2>
+                </div>
+
+                <div class="d-flex justify-content-center text-white fw-bold">
+                    Vous pouvez nous contacter par l'un des moyens suivants :
+                </div>
+
+                <div class="d-md-flex flex-md-row justify-content-center py-4">
+
+                    <div class="d-md-flex flex-md-column px-4 text-dark fw-bold bg-white">
+                        <i class="fa fa-map-marker fw-bold fs-5  text-center p-3"></i>
+                        <p>
+                            {{ restaurant.adresse }}
+                            {# 66 avenue des Champs-Elysés  #}
+                            <br>
+                            {# 75 008 PARIS #}
+                            {{ restaurant.code }} {{ restaurant.ville }}
+                        </p>
+                    </div>
+
+                    <div class="d-flex flex-column px-4 text-dark fw-bold bg-white">
+                        <i class="fa fa-envelope fw-bold fs-5  text-center p-3"></i>
+                        <p>
+                            contact@restolico.fr
+                        </p>
+                    </div>
+                </div>
+                <br><br>
+            </section>
+
+            <section class="bg-primary mb-5 fondImageContact2">
+                <div class="d-flex justify-content-center pt-5">
+                    <h2 class="font-weight-bold text-black">Nous Suivre</h2>
+                </div>
+
+                <div class="d-flex justify-content-center fw-bold text-white">
+                    Vous pouvez nous suivre via les réseaux sociaux :
+                </div>
+
+                <div class="d-md-flex flex-md-row justify-content-center py-4">
+                    <div class="d-flex flex-column px-4">
+                        <div class="d-md-flex justify-content-center py-2"> 
+                            <p ><i class="fa-brands fa-facebook-f fw-bold fs-5 text-white"></i> </p>
+                        </div>
+                        <div class="contact-info text-black fw-bold">Facebook</div>
+                    </div>
+
+                    <div class="d-flex flex-column px-4">
+                        <div class="d-md-flex justify-content-center py-2"> 
+                            <p><i class="fa-brands fa-twitter fw-bold fs-5 text-white"></i> </p> 
+                        </div>
+                        <div class="contact-info text-black fw-bold">Twitter</div>
+                    </div>
+                </div>
+                <br><br>
+            </section>
+
+            <section class="bg-primary mb-5 fondImageContact3">
+                <div class="d-flex justify-content-center pt-5">
+                    <h2 class="font-weight-bold text-white">Formulaire de Contact</h2>
+                </div>
+
+                <div class="d-flex justify-content-center text-dark fw-bold">
+                    Vous pouvez nous contacter également par le formulaire de contact :
+                </div>
+
+                <div class="d-flex flex-row justify-content-center mt-5">
+
+                    <form class="w-xl-50 w-lg-75 mb-5"  action="{{ path('contact') }}" method="post">
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="nom" name="nom">
+                                        <label for="email"><i class="fa-solid fa-user"></i> Nom</label>
+                                    </div>
+
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="email" name="email">
+                                        <label for="email"><i class="fa fa-envelope mr-3"></i> Email</label>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    <div class="form-floating">
+                                        <textarea class="form-control msg" cols="10" rows="9" id="message" name="message"></textarea>
+                                        <label for="floatingTextarea"><i class="fa-solid fa-pen"></i> Votre message</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="d-flex flex-row justify-content-center w-100"> 
+                                    <button type="submit" class="btn">Envoyer le message</button> 
+                                </div>
+                                <br><br>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </section> 
+      
+        </div>
+		
+    </section>
+
+{% endblock %}

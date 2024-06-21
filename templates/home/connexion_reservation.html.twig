@@ -1,0 +1,88 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+
+    <h1>Espace Client</h1>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="mb-3 fondImageLogin">
+                    <h2 class="text-center mt-5 titre">Connexion Reservation</h2>
+                </div>
+            
+                <div class="col-sm-6 signin">
+
+                    {# --------------- debut ------------------ #}
+
+                    <form class="p-5" action="{{ path('connexion_reservation') }}" method="post">
+
+                        <h2>Déjà Client ?</h2>
+
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+
+                        <div class="form-floating mb-3">
+							<input type="email" class="form-control" value="{{ last_username }}" name="email" id="email" autocomplete="email" required autofocus>
+                            <label for="email"><i class="fa fa-envelope mr-3"></i> Email</label>
+                        </div>
+
+                        <div class="form-floating mb-3">
+							<input type="password" class="form-control" name="password" id="password" autocomplete="password" required>
+                            <label for="password"><i class="fa-solid fa-lock"></i> Mot de passe</label>
+                        </div>
+                        
+                        <input class="checkbox" type="checkbox" onclick="togglePasswordVisibility('password')">
+                        Afficher mot de passe
+                        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        <a class="ForgotPassBtn" href="{{ path('app_forgot_password_request') }}">Mot de passe oublié ?</a>
+                        
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <input type="hidden" name="redirect_to" value="reservation">
+
+                    
+                        <p class="d-flex justify-content-center">
+                            <button class="btn" type="submit">Se Connecter</button>
+                        </p>
+
+                    </form>
+
+                     {# --------------------------- fin -------------------------------- #}
+
+                    <h2>Nouveau Client ?</h2>
+                    <p>
+                        Si vous n'avez pas encore un compte, il suffit de vous inscrire en cliquant  
+                        sur le bouton ci-dessous.
+                    </p>
+                    <p class="d-flex justify-content-center">
+                        <a class="btn" href="{{ path('inscription') }}">Inscrivez-vous ici</a>    
+                    </p>
+                    
+                </div> 
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+
+{% block javascripts %}
+
+	<script>
+		function togglePasswordVisibility(inputId) 
+		{
+			var passwordInput = document.getElementById(inputId);
+			if (passwordInput.type === "password") 
+			{
+				passwordInput.type = "text";
+			} 
+			else 
+			{
+				passwordInput.type = "password";
+			}
+		}
+	</script>
+	
+{% endblock %}

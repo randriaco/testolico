@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Confirmation de Votre Réservation{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-4">
+        <h1 class="text-center">Confirmation de Votre Réservation</h1>
+
+        <div class="mt-4">
+
+            {# -----------debut ------------------- #}
+            {% for emplacement in reservationDetails %}
+                <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="text-center mb-0">{{ emplacement.emplacement|capitalize }}</h2>
+                </div>
+
+                {% for table in emplacement.tables %}
+                    <div class="card mb-3">
+                    <div class="card-header bg-dark text-white fw-bold">
+                        Table {{ table.tableId }}
+                    </div>
+
+                    <div class="card-body">
+                        <h4>Chaises sélectionnées :</h4>
+                        <ul>
+                        {% for chaise in table.chaises %}
+                            {# <li>{{ chaise }}</li> #}
+                            <li>{{ chaise|split('_')[2] }}</li> {# Extrait la partie "C1", "C2", etc. #}
+                        {% endfor %}
+                        </ul>
+                    </div>
+                    </div>
+                {% endfor %}
+                </div>
+            {% endfor %}
+            {# -----------------fin ---------------------- #}
+        </div>
+        <a href="{{ path('liste_table_chaise') }}" class="btn btn-primary mb-5">Retour à la liste Table - Chaise</a>
+    </div>
+
+{% endblock %}

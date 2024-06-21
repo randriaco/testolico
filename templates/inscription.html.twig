@@ -1,0 +1,93 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <div class="container mx-auto" style="width:700px">
+
+        <h1 class="text-center mt-5 mb-5">Inscription</h1>
+
+        {{ form_errors(registrationForm) }}
+
+         {# Affichage des messages flash  #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {% for message in app.flashes('message') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+       {{ form_start(registrationForm, {'attr': {'class': 'form-horizontal'}}) }}
+
+            <div class="form-group">
+                {{ form_label(registrationForm.nom, 'Nom', {'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                <div class="col-sm-10 mb-3">
+                    {{ form_widget(registrationForm.nom, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+            
+            <div class="form-group">
+                {{ form_label(registrationForm.prenom, 'Prenom', {'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                <div class="col-sm-10 mb-3">
+                    {{ form_widget(registrationForm.prenom, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(registrationForm.telephone, 'Telephone', {'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                <div class="col-sm-10 mb-3">
+                    {{ form_widget(registrationForm.telephone, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(registrationForm.telephone) }} 
+                </div>
+            </div>
+            
+            <div class="form-group">
+                {{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                <div class="col-sm-10 mb-3">
+                    {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control'}}) }}
+                    {{ form_errors(registrationForm.email) }} 
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form_label(registrationForm.plainPassword, 'Mot de passe', {'label_attr': {'class': 'control-label col-sm-2'}}) }}
+                <div class="col-sm-10">
+                    <div class="mb-3">
+                        {{ form_widget(registrationForm.plainPassword.first, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                    <div class="mb-3">
+                        {{ form_widget(registrationForm.plainPassword.second, {'attr': {'class': 'form-control'}}) }}
+                    </div>
+                </div>
+            </div>
+
+            {# <div class="form-group mb-3">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <div class="checkbox">
+                        {{ form_widget(registrationForm.agreeTerms) }}
+                        {{ form_label(registrationForm.agreeTerms, 'I agree to the terms', {'label_attr': {'class': 'control-label'}}) }}
+                    </div>
+                </div>
+            </div> #}
+
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10 text-center">
+                    <button type="submit" class="btn btn-primary">S'inscrire</button>
+                </div>
+            </div>
+
+        {{ form_end(registrationForm) }}
+
+    </div>
+    
+{% endblock %}

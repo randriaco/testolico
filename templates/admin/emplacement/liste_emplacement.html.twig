@@ -1,0 +1,38 @@
+{# templates/emplacement/index.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>Liste des Emplacements</h1>
+
+        <a href="{{ path('creer_emplacement') }}" class="btn btn-primary mb-3">Ajouter un nouvel Emplacement</a>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Nombre de Tables</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for emplacement in emplacements %}
+                    <tr>
+                        <td>{{ emplacement.nom }}</td>
+                        <td>{{ emplacement.tables|length }}</td>
+                        <td>
+                            <a href="{{ path('detail_emplacement', {'id': emplacement.id}) }}" class="btn btn-info btn-sm">Voir</a>
+                            <a href="{{ path('modifier_emplacement', {'id': emplacement.id}) }}" class="btn btn-warning btn-sm">Modifier</a>
+                            <form method="post" action="{{ path('supprimer_emplacement', {'id': emplacement.id}) }}" style="display: inline-block;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet emplacement ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ emplacement.id) }}">
+                                <button class="btn btn-danger btn-sm">Supprimer</button>
+                            </form>
+                            <a href="{{ path('creer_table', {'id': emplacement.id}) }}" class="btn btn-info btn-sm">Creer Table</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,108 @@
+{# -------------------------debut : jours specifiques--------------------------------------- #}
+								
+{% if estDansSemaineActuelle and estAvantAujourdhui %}
+    {# Ne pas afficher les créneaux pour les jours passés de la semaine actuelle #}
+{% else %}
+    {# Gérer les différents statuts pour un jour spécifique #}
+    {% if jourSpecifique.status == 'Fermé' %}
+
+        <div class="creneaux">
+            {% if creneaux[jour].matin is defined %}
+                {% for creneau in creneaux[jour].matin %}
+                    <div class="creneau" style="border: none;"></div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+        <div class="creneaux">
+            {% if creneaux[jour].soir is defined %}
+                {% for creneau in creneaux[jour].soir %}
+                    <div class="creneau" style="border: none;"></div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+    {% elseif jourSpecifique.status == 'Fermé Matin' %}
+        {# Afficher les créneaux seulement pour le soir #}
+        <div class="creneaux">
+            {% if creneaux[jour].soir is defined %}
+                {% for creneau in creneaux[jour].soir %}
+                    {# ne pas afficher les creneaux passés #}
+                    {% if not estJourActuel or (estJourActuel and creneau > heureActuelle) %}
+                        <div class="col-12 mb-2"> 
+                            <input type="radio" class="btn-check creneau-radio" name="creneau" id="creneau-{{ jour }}-soir-{{ loop.index }}" autocomplete="off" value="{{ dates[jour]|date('m/d/Y') }}-{{ creneau }}"  data-date="{{ dates[jour]|date('Y-m-d') }}" data-time="{{ creneau }}">
+                            <label class="label-radio-personnalise" for="creneau-{{ jour }}-soir-{{ loop.index }}">{{ creneau }}</label>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    
+    {% elseif jourSpecifique.status == 'Fermé Soir' %}
+        {# Afficher les créneaux seulement pour le matin #}
+        <div class="creneaux">
+            {% if creneaux[jour].matin is defined %}
+                {% for creneau in creneaux[jour].matin %}
+                    
+                    {# ne pas afficher les creneaux passés #}
+                    {% if not estJourActuel or (estJourActuel and creneau > heureActuelle) %}
+                        <div class="col-12  mb-2"> 
+                            <input type="radio" class="btn-check creneau-radio" name="creneau" id="creneau-{{ jour }}-matin-{{ loop.index }}" autocomplete="off" value="{{ dates[jour]|date('m/d/Y') }}-{{ creneau }}"  data-date="{{ dates[jour]|date('Y-m-d') }}" data-time="{{ creneau }}">
+                            <label class="label-radio-personnalise" for="creneau-{{ jour }}-matin-{{ loop.index }}">{{ creneau }}</label>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+
+    {% elseif jourSpecifique.status == 'Continu' %}
+        {# Afficher les créneaux pour toute la journée #}
+        <div class="creneaux">
+            {% if creneaux[jour].continu is defined %}
+                {% for creneau in creneaux[jour].continu %}
+                    {# ne pas afficher les creneaux passés #}
+                    {% if not estJourActuel or (estJourActuel and creneau > heureActuelle) %}
+                    <div class="col-12 mb-2"> 
+                        <input type="radio" class="btn-check creneau-radio" name="creneau" id="creneau-{{ jour }}-continu-{{ loop.index }}" autocomplete="off" value="{{ dates[jour]|date('m/d/Y') }}-{{ creneau }}"  data-date="{{ dates[jour]|date('Y-m-d') }}" data-time="{{ creneau }}">
+                        <label class="label-radio-personnalise" for="creneau-{{ jour }}-continu-{{ loop.index }}">{{ creneau }}</label>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+
+    {% else %}
+        {# Afficher les créneaux pour le matin et le soir #}
+        <div class="creneaux">
+            {# Vérifier et afficher les créneaux du matin #}
+            {% if creneaux[jour].matin is defined %}
+                {% for creneau in creneaux[jour].matin %}
+                    {# ne pas afficher les creneaux passés #}
+                    {% if not estJourActuel or (estJourActuel and creneau > heureActuelle) %}
+                        <div class="col-12  mb-2"> 
+                            <input type="radio" class="btn-check creneau-radio" name="creneau" id="creneau-{{ jour }}-matin-{{ loop.index }}" autocomplete="off" value="{{ dates[jour]|date('m/d/Y') }}-{{ creneau }}"  data-date="{{ dates[jour]|date('Y-m-d') }}" data-time="{{ creneau }}">
+                            <label class="label-radio-personnalise" for="creneau-{{ jour }}-matin-{{ loop.index }}">{{ creneau }}</label>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="creneaux">
+            {# Vérifier et afficher les créneaux du soir #}
+            {% if creneaux[jour].soir is defined %}
+                {% for creneau in creneaux[jour].soir %}
+                    {# ne pas afficher les creneaux passés #}
+                    {% if not estJourActuel or (estJourActuel and creneau > heureActuelle) %}
+                        <div class="col-12 mb-2"> 
+                            <input type="radio" class="btn-check creneau-radio" name="creneau" id="creneau-{{ jour }}-soir-{{ loop.index }}" autocomplete="off" value="{{ dates[jour]|date('m/d/Y') }}-{{ creneau }}"  data-date="{{ dates[jour]|date('Y-m-d') }}" data-time="{{ creneau }}">
+                            <label class="label-radio-personnalise" for="creneau-{{ jour }}-soir-{{ loop.index }}">{{ creneau }}</label>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+
+    {% endif %}
+{% endif %}
+
+{# -------------------------fin : jours specifiques--------------------------------------- #}

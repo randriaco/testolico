@@ -16,6 +16,12 @@ framework:
     php_errors:
         log: true
 
+    # Ajoutez cette section pour activer la validation
+    validation:
+        email_validation_mode: html5
+        enabled: true # Décommentez cette ligne si vous utilisez des annotations pour la validation
+        enable_attributes: true
+
 when@test:
     framework:
         test: true

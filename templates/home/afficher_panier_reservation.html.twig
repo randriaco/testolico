@@ -1,0 +1,115 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}Votre panier{% endblock %}
+
+{% block body %}
+
+	<br><br><br><br>
+
+	<div class="container mt-4">
+	
+		<h1>Votre panier</h1>
+
+        {# ------------message flash----------- #}
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        {% endfor %}
+
+        {# Bouton pour aller à la page du panier #}
+		<div class="text-end mb-3">
+			<a href="{{ path('commande_sur_place') }}" class="btn">Liste des Categories</a>
+		</div>
+			
+				{% set totalGeneral = 0 %}
+				
+				{% for item in contenuPanier %}
+				
+					{% set produit = item.produit %}
+					{% set totalLigne = produit.prix * item.quantite %}
+
+					<div class="card rounded-3 mb-3">									
+						<div class="card-body p-4">
+
+							<div class="row d-flex justify-content-between align-items-center">
+
+								<div class="col-md-3 col-lg-3 col-xl-3">
+									<div class="d-flex justify-content-center">
+										<span class="bg-warning text-dark text-center ms-2 fw-bold fs-5 p-2 mb-2 rounded-3" style="width:200px;">{{ produit.nom }}</span>
+									</div>
+								</div>
+								<br><br>
+								<div class="col-md-6 col-lg-6 col-xl-6">
+									<div class="d-flex justify-content-center fw-bold fs-5">
+											<a href="{{ path('panier_moins_reservation', {'id': produit.id}) }}">
+												<i class="fas fa-minus rounded p-2  bg-primary fw-bold text-white"></i>
+											</a>
+												&nbsp; {{ item.quantite }} &nbsp;
+											<a href="{{ path('panier_plus_reservation', {'id': produit.id}) }}">
+												<i class="fas fa-plus rounded p-2 bg-primary fw-bold text-white"></i>
+											</a>
+											&nbsp; x {{ produit.prix | number_format(2, '.', ',') }} € = {{ totalLigne | number_format(2, '.', ',') }} €
+									</div>
+								</div>
+								<br><br>
+								<div class="col-md-3 col-lg-3 col-xl-3 text-end">
+									<div class="d-flex justify-content-center">
+											<a href="{{ path('panier_retirer_reservation', {'id': produit.id}) }}" class="bulle">
+												<i class="fa-solid fa-trash text-danger"></i>
+												<span>Supprimer ce Produit</span>
+											</a>
+									</div>
+								</div>
+
+
+							</div>
+							
+						</div>
+					</div>
+					
+					{% set totalGeneral = totalGeneral + totalLigne %}
+					
+				{% endfor %}
+				
+		<div class="border rounded-3 p-3">
+			<div class="d-flex justify-content-center fw-bold" id="total-general">
+				Montant Total à Payer = {{ totalGeneral | number_format(2, '.', ',') }} €
+			</div>
+			<div class="d-flex justify-content-center">
+				<button id="bouton-payer" class="btn btn">Payer ({{ totalGeneral | number_format(2, '.', ',') }} €)</button>
+			</div>
+		</div>
+		
+	</div>	
+		
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <script>
+
+        var stripe = Stripe('pk_test_51KG0R8B70WhTmRhmzSfWznYOhTXWtXNBoJTWVUTsGAJGy3wBc6jVSlZJEsA23iTk0YTfQpzKwW1CK4xw6FAhZ7SN001VujS2RM');
+
+        document.getElementById('bouton-payer').addEventListener('click', function () 
+        {
+            fetch('/creer-session-paiement')
+                .then(function (response) 
+                {
+                    return response.json();
+                })
+                .then(function (session) 
+                {
+                    return stripe.redirectToCheckout({ sessionId: session.id });
+                })
+                .catch(function (error) 
+                {
+                    console.error('Erreur:', error);
+                });
+        });
+        
+    </script>
+
+{% endblock %}

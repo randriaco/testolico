@@ -1,0 +1,48 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Modifier la Date de Fermeture{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+
+        <h1>Modifier la Date de Fermeture</h1>
+
+        {# Affichage des messages flash #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {{ form_start(form) }}
+
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Début Fermeture</th>
+                        <th>Fin Fermeture</th>
+                        <th>Motif</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr>
+                        <td>{{ form_widget(form.debutFermeture) }}</td>
+                        <td>{{ form_widget(form.finFermeture) }}</td>
+                        <td>{{ form_widget(form.motif) }}</td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">Modifier</button>
+                            {# Bouton de retour à la page des jours spécifiques #}
+                            <a href="{{ path('jours_multiples') }}" class="btn btn-success">Retour</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        {{ form_end(form) }}
+
+    </div>
+
+{% endblock %}

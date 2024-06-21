@@ -1,0 +1,193 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}Mon Resto{% endblock %}
+
+{% block body %}
+
+    
+    <br><br><br>
+
+    <h1  class="container border rounded-3 p-4 mt-4">
+        <div class="enteteTitre">{{ restaurant.nom }}</div>
+        {{ restaurant.adresse }} <br>
+        {{ restaurant.code }}  {{ restaurant.ville }}
+    </h1>
+
+    <section class="container border rounded-3 p-4 mt-4">
+
+        <div class="photoAccueil">
+
+            <div class="d-flex justify-content-center formulaire">
+
+                <form>
+                
+                    <div class="enteteTitreNoir">
+                    
+                        <p> 
+                            Pour gagner du temps, 
+                        </p>
+
+                        <p>
+                            Réservez, commandez, et payez en ligne
+                        </p>
+
+                        <p>
+                            disponible 7j/7 et 24h/24
+                        </p>
+
+                    </div>
+                    
+                    <div class="text-center">
+                        <a href="{{ path('reserver') }}" class="btn">Reserver et Commander</a>
+                        {# <a href="{{ path('commande_emporter') }}" class="btn">Commandes à Emporter</a> #}
+                        <a href="{{ path('admin_profil') }}" class="btn">Admin</a>
+                    </div>
+
+                </form> 
+                    
+            </div>
+
+        </div>  
+
+    </section>
+        
+    <section class="container border rounded-3 p-4 mt-4">
+        <div class="container">
+
+            <h2>Comment ça fonctionne</h2>
+
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-12 text-center">
+                    <div class="card mb-3">
+                        <img src="{{ asset('photos/etape1.jpg') }}" class="card-img-top" alt="..." height="250px">
+                        <div class="card-body">
+                            <h5 class="card-title">Etape 1</h5>
+                            <p class="card-text">
+                                <br>
+                                Réservez en ligne gratuitement votre table en choisissant : <br>
+                                <br>
+                                - le nombre de couvert <br>
+                                - la date <br>
+                                - l'heure. <br>
+                                <br>
+                                <br>
+                                <br>
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm-12 text-center">
+                    <div class="card mb-3">
+                        <img src="{{ asset('photos/etape2.jpg') }}" class="card-img-top" alt="..." height="250px">
+                        <div class="card-body">
+                            <h5 class="card-title">Etape 2</h5>
+                            <p class="card-text">
+                                <br>
+                                Pour gagner du temps, vous pouvez également commander gratuitement en ligne
+                                (sur place ou à emporter) : <br>
+                                <br>
+                                - l'entrée <br>
+                                - le plat <br>
+                                - le dessert <br>
+                                - la boisson <br>
+                                - le menu <br>
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-4 col-sm12 text-center">
+                    <div class="card mb-3">
+                        <img src="{{ asset('photos/etape3.jpg') }}" class="card-img-top" alt="..." height="250px">
+                        <div class="card-body">
+                            <h5 class="card-title">Etape 3</h5>
+                            <p class="card-text">
+                                <br>
+                                Une fois arrivé au restaurant, il vous suffit de mentionner :<br>
+                                <br>
+                                - votre nom <br>
+                                - le nombre de personnes <br>
+                                <br> 
+                                tout est pret <br>
+                                <br>
+                                Bon appetit
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+
+    <section class="container border rounded-3 p-4 mt-4">
+
+        <div class="container">
+            <h2>Espace Client</h2>
+            <div class="card mb-3" >
+                <div class="row g-0">
+                    <div class="col-md-6">
+                    <img src="{{ asset('photos/client.jpg') }}" class="img-fluid rounded-start" alt="...">
+                    </div>
+                    <div class="col-md-6">
+                    <div class="card-body">
+                        <h5 class="card-title"><span>Espace</span>  Client</h5>
+                        <p class="card-text">
+                            <br>
+                            Votre Espace Client vous permet de : <br>
+                            <br>
+                            - voir et modifier votre profil <br>
+                            - modifier votre mot de passe <br>
+                            - voir, modifier, annuler vos réservations <br>
+                            - voir, modifier, annuler vos commandes <br>
+                        </p>
+                        <div class="text-center">
+                            <a class="btn" href="#">Se Connecter</a>                    
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </section>
+
+    <section class="container border rounded-3 p-4 mt-4">
+
+        <div class="container">
+            <h2>Espace Professionnel</h2>
+            
+            <div class="card mb-3" >
+                <div class="row g-0">
+                    <div class="col-md-6">
+                        <img src="{{ asset('photos/professionnel.jpg') }}" class="img-fluid rounded-start" alt="...">
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card-body">
+                            <h5 class="card-title"><span>Espace</span>  Professionnel</h5>
+                            <p class="card-text">
+                                <br>
+                                Votre Espace Professionnel vous permet de : <br>
+                                <br>
+                                - voir et modifier votre profil <br>
+                                - modifier votre mot de passe <br>
+                                - voir la liste de vos réservations <br>
+                                - voir la liste de vos commandes <br> 
+                                - etc ... <br>
+                            </p>
+                            <div class="text-center">
+                                <a class="btn" href="#">Se Connecter</a>                        
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        
+    </section>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}Commandes sur Place{% endblock %}
+
+{% block body %}
+
+    <br><br>
+
+    <div class="container mt-5 mb-4 border rounded-3 p-4" style="max-width: 800px;">
+    
+        <h1>Commandes sur Place avec Réservation</h1>
+        
+        <div class="row">            
+            {% for categorie in categories %}
+
+                <div class="col-md-6 d-flex justify-content-center">
+                    <a href="{{ path('afficher_produits_par_categorie_reservation', {'nomCategorie': categorie.nom}) }}" class="btn">{{ categorie.nom }}</a>
+                </div> 
+
+            {% endfor %}       
+        </div>
+
+    </div>
+
+{% endblock %}

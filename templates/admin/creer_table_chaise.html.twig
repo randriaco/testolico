@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <title>{% block title %}Gestion Table Chaise{% endblock %}</title>
+
+    <div class="container">
+
+        <br>
+
+        <h1 class="text-center">Gestion des Tables et des Chaises</h1>
+
+        {# Affichage des messages flash #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <br>
+
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Numero Table</th>
+                        <th>Nombre Chaise</th>
+                        <th>Emplacement</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ form_widget(form.numeroTable) }}</td>
+                        <td>{{ form_widget(form.nombreChaise) }}</td>
+                        <td>{{ form_widget(form.emplacement) }}</td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">Ajouter</button>
+                            <a href="{{ path('liste_table_chaise') }}" class="btn btn-primary">Listes</a>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        {{ form_end(form) }}
+
+        <br>
+
+        <h2>Liste Tables et Chaises</h2>
+
+        <br>
+
+        <table class="table table-bordered text-center">
+		
+            <thead>
+                <tr>
+                    <th>Numero Table</th>
+					<th>Nombre Chaise</th>
+					<th>Emplacement</th>
+					<th>Actions</th>
+                </tr>
+            </thead>
+			
+            <tbody>
+
+                {% for chaise in chaises %}
+
+                    <tr>
+                        <td>{{ chaise.numeroTable }}</td>
+                        <td>{{ chaise.nombreChaise }}</td>
+                        <td>{{ chaise.emplacement }}</td>
+                        <td>
+                            <a href="{{ path('modifier_table_chaise', {'id': chaise.id}) }}" class="btn btn-primary">Modifier</a>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                Supprimer
+                            </button>
+                        </td>
+                    </tr>
+
+                    {# ------------------------------------------debut :  Modal --------------------------------------------- #}
+                    
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Supprimer Table Chaise</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Etes-vous sûr de supprimer cette table et chaise ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Non</button>
+                                <a href="{{ path('supprimer_table_chaise', {'id': chaise.id}) }}" class="btn btn-danger">Oui</a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {# ------------------------------------------fin :  Modal --------------------------------------------- #}
+
+                {% endfor %}
+
+            </tbody>
+			
+        </table>
+
+    </div>
+
+{% endblock %}

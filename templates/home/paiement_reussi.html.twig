@@ -1,0 +1,31 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}Paiement Réussi{% endblock %}
+
+{% block body %}
+
+    <br><br><br><br>
+
+    <div class="container border rounded-3 mt-4 p-4" style="width:600px;">
+
+        <h1>Commande Effectuée</h1>
+
+        <hr>
+
+        <p>Votre commande du <strong>{{ commande.date|date('d/m/Y') }}</strong> à <strong>{{ commande.date|date('H:i') }}</strong> 
+        pour le <strong>{{ commande.dateReservation|date('d/m/Y') }}</strong> 
+        d'un montant de <strong>{{ commande.montant }}</strong> € a été bien effectuée avec succès.</p>
+
+        <p>Un email vient de vous être envoyé. Vous pouvez dès maintenant consulter votre boite de reception et votre compte pour voir tous les détails.</p>
+
+        <p>Merci pour votre réservation et votre commande !</p>
+
+        <hr>
+
+        <div class="d-flex justify-content-center">
+            <a href="{{ path('mes_commandes') }}" class="btn ">Voir mes commandes</a>
+        </div>
+
+    </div>
+    
+{% endblock %}

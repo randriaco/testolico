@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+
+        <title>{% block title %}Modifier Produit{% endblock %}</title>
+
+        <h1 class="text-center mt-5">Modifier le Produit</h1>
+
+        {# Affichage des messages flash #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <br>
+
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Photo</th>
+                        <th>Nom</th>
+                        <th>Description</th>
+                        <th>Prix</th>
+                        <th>Catégorie</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ form_row(form.imageFile) }}</td> 
+                        <td>{{ form_row(form.nom) }}</td>
+                        <td>{{ form_row(form.description) }}</td>
+                        <td>{{ form_row(form.prix) }}</td>
+                        <td>{{ form_row(form.categorie) }}</td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">Modifier</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        {{ form_end(form) }}
+
+    </div>
+
+{% endblock %}

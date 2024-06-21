@@ -1,0 +1,145 @@
+{% extends 'client.html.twig' %} 
+
+{% block title %}Mes Reservations{% endblock %}
+
+{% block body %}
+
+	{#  ------------------------------------- Partie : contenu debut-----------------------------------  #}
+
+	<div class="container mt-5">
+
+		<div class="row">
+
+			<div class="col-12">
+			
+				<div id="main-content" class="bg-white border">
+					
+					<h1>Mes Reservations</h1>
+
+					{# Affichage des messages flash #}
+					{% for message in app.flashes('success-reservation') %}
+						<div class="alert alert-success">
+							{{ message }}
+						</div>
+					{% endfor %} 
+
+					{% for message in app.flashes('danger') %}
+						<div class="alert alert-danger">
+							{{ message }}
+						</div>
+					{% endfor %} 
+					
+					<section>
+						<div class="row">
+
+							{% for reservation in reservations %}
+
+								<div class="card rounded-3 mb-3">		
+									<div class="card-body p-4">
+
+										<div class="row d-flex justify-content-center align-items-center">
+
+											<div class="col-md-3 col-lg-3 col-xl-3">
+												<div class="d-flex justify-content-center align-items-center">
+													<span class="bg-primary text-white fw-bold fs-5 p-2 mb-2 rounded-3 text-center" style="width:200px;">Date </span>
+												</div>
+												<div class="d-flex  justify-content-center align-items-center">
+													<span class="bg-light ms-2 fw-bold fs-5 p-2 mb-2 rounded-3">{{ reservation.dateReservation|date('d/m/Y') }}</span>
+												</div>
+											</div>
+											
+											<div class="col-md-3 col-lg-3 col-xl-3">
+												<div class="d-flex  justify-content-center align-items-center">
+													<span class="bg-dark text-white fw-bold fs-5 p-2 mb-2 rounded-3" style="width:200px; text-align:center;">Horaire </span>
+												</div>	
+												<div class="d-flex  justify-content-center align-items-center">
+													<span class="bg-light ms-2 fw-bold fs-5 p-2 mb-2 rounded-3">{{ reservation.horaireReservation }}</span>
+												</div>
+											</div>
+											
+											<div class="col-md-3 col-lg-3 col-xl-3">
+												<div class="d-flex justify-content-center  align-items-center">
+													<span class="bg-warning text-white fw-bold fs-5 p-2 mb-2 rounded-3" style="width:200px; text-align:center;">Nb de Couvert </span>
+												</div>	
+												<div class="d-flex justify-content-center align-items-center">
+													<span class="bg-light ms-2 fw-bold fs-5 p-2 mb-2 rounded-3">{{ reservation.nombreCouverts }}</span>
+												</div>
+											</div>
+
+											{# -----------------debut condition si commande ou non ------------ #}
+
+											{% if reservation.commande %}
+		 
+												<div class="d-flex justify-content-center col-md-3 col-lg-3 col-xl-3"> 
+													<a href="{{ path('mes_commandes', {'id': reservation.id}) }}" class="bulle">
+														<i class="fas fa-info-circle fs-2"></i>
+														<span class="modifier">Voir mes commandes</span>
+													</a>
+												</div>
+												
+											{% else %}
+												
+												<div class="d-flex justify-content-center col-md-3 col-lg-3 col-xl-3">
+													<a href="{{ path('modifier_reservation', {'id': reservation.id}) }}" class="bulle">
+														<i class="fa-solid fa-pen text-primary"></i>
+														<span class="modifier">Modifier la réservation</span>
+													</a>                                           
+													&nbsp;
+													<a href="{{ path('commande_sur_place', {'id': reservation.id}) }}" class="bulle">
+														<i class="fa-solid fa-shopping-cart text-success"></i>
+														<span class="modifier">Commander</span>
+													</a>                                           
+													&nbsp;
+													<a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="bulle">
+														<i class="fa-solid fa-trash text-danger"></i>
+														<span class="annuler">Annuler la réservation</span>
+													</a>
+
+													{# ------------------------------------------debut :  Modal --------------------------------------------- #}
+
+													<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+														<div class="modal-dialog text-center">
+															<div class="modal-content">
+																<div class="modal-header">
+																	<h1 class="modal-title fs-5" id="staticBackdropLabel">Supprimer la reservation</h1>
+																	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+																</div>
+																<div class="modal-body">
+																	Etes-vous sûr de supprimer cette reservation ?
+																</div>
+																<div class="modal-footer">
+																	<button type="button" class="btn-modal-non" data-bs-dismiss="modal">Non</button>
+																	<a href="{{ path('annuler_reservation', {'id': reservation.id}) }}" class="btn-modal-oui">Oui</a>
+																</div>
+															</div>
+														</div>
+													</div>
+
+													{# ------------------------------------------fin :  Modal --------------------------------------------- #}
+												</div>
+												
+											{% endif %}
+
+											{# -------------------fin condition si commande ou non ------------ #}
+
+										</div>
+										
+									</div>	
+								</div>
+
+							{% endfor %}
+
+						</div>
+					</section>
+
+				</div>
+				
+			</div>
+
+		</div>
+	</div>
+	
+	{#  ---------------------------------Partie : contenu fin----------------------------------------  #}
+	
+	
+{% endblock %}

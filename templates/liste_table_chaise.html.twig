@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <title>{% block title %}Liste Table Chaise{% endblock %}</title>
+
+    <div class="container mt-4">
+        <h1 class="text-center">Liste des Tables et Chaises</h1>
+
+        <br>
+
+        {% set emplacements = ['rdc', 'terrasse', 'etage', 'autre'] %}
+
+        {# -------------------debut formulaire---------------------- #}
+
+        <form action="{{ path('confirmer_reservation') }}" method="POST">
+
+            {% for emplacement in emplacements %}
+                {% set tablesParEmplacement = listes|filter(table => table.emplacement == emplacement) %}
+
+                {% if tablesParEmplacement|length > 0 %}
+                    <div class="mb-4">
+
+                        <div class="card mb-3">
+                            <div class="card-header bg-primary text-white">
+                                <h2 class="text-center mb-0">{{ emplacement|capitalize }}</h2>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{ emplacement }}" id="emplacement{{ emplacement }}" name="emplacement[]">
+                            <label class="form-check-label" for="emplacement{{ emplacement }}">
+                                Cocher pour sélectionner l'emplacement : {{ emplacement|capitalize }}
+                            </label>
+                        </div>
+                        <br>
+                        <div class="row">
+
+                            {% for table in tablesParEmplacement %}
+                                <div class="col-md-4">
+                                    <div class="card text-center mb-3"  style="height: 250px;">
+                                        <div class="card-header bg-dark text-white fw-bold">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" value="{{ table.numeroTable }}" id="table{{ table.id }}" name="table[]">
+                                                <label class="form-check-label" for="table{{ table.id }}">
+                                                    Table {{ table.numeroTable }}
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-body d-flex justify-content-around">
+
+                                            <div>
+                                                {% for i in 1..table.nombreChaise %}
+                                                    {% if i is odd %}
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="C{{ i }}" id="chaise{{ i }}"  name="chaise[]">
+                                                            <label class="form-check-label" for="chaise{{ i }}">C{{ i }}</label>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+
+                                            <div>
+                                                {% for i in 1..table.nombreChaise %}
+                                                    {% if i is even %}
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="checkbox" value="C{{ i }}" id="chaise{{ i }}"  name="chaise[]">
+                                                            <label class="form-check-label" for="chaise{{ i }}">C{{ i }}</label>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                {% endif %}
+
+            {% endfor %}
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary">Réserver</button>
+            </div>
+
+        </form>
+        {# ------------------------------fin formulaire------------------------ #}
+
+        {# <a href="{{ path('confirmer_reservation') }}" class="btn btn-primary">Confirmer</a> #}
+        <br>
+        
+    </div>
+
+{% endblock %}

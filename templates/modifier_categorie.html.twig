@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+
+        <title>{% block title %}Modifier Categorie{% endblock %}</title>
+
+        <h1>Modifier la Categorie</h1>
+
+        {# Affichage des messages flash #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ form_widget(form.nom) }}</td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">Modifier</button>
+                            {# Bouton de retour à la page des jours spécifiques #}
+                            <a href="{{ path('creer_categorie') }}" class="btn btn-success">Retour</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        {{ form_end(form) }}
+
+    </div>
+
+{% endblock %}

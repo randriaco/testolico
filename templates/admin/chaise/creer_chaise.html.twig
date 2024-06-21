@@ -1,0 +1,16 @@
+{# templates/chaise/new.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>Ajouter une nouvelle Chaise</h1>
+
+        {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button class="btn btn-success">Créer</button>
+        {{ form_end(form) }}
+
+        <a href="{{ path('liste_chaise') }}" class="btn btn-primary mt-3">Retour à la liste</a>
+    </div>
+{% endblock %}

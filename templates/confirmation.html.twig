@@ -1,0 +1,57 @@
+{# {% extends 'base.html.twig' %} #}
+{% extends 'home.html.twig' %}
+
+{% block title %}Confirmez votre inscription{% endblock %}
+
+{% block body %}
+
+    <section>
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-sm-6 signin">
+
+                    <br><br>
+
+                    <h2 class="mt-5">Confirmez votre Inscription</h2>
+
+                    {# Affichage des messages flash #}
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+
+                    {% for message in app.flashes('error') %}
+                        <div class="alert alert-danger">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+
+                    {{ form_start(confirmationForm) }}
+
+                        <div class="col-md-6">
+                        
+                            <label for="prenom" class="form-label">
+                                <i class="fa-solid fa-lock"></i> Code de confirmation
+                            </label>
+
+                            <div class="form-group">
+                                    {{ form_widget(confirmationForm.confirmationCode, {'attr': {'class': 'form-control'}}) }}
+                            </div>
+                            {# {{ form_row(confirmationForm.confirmationCode, {'attr': {'class': 'form-control'}}) }} #}
+                        </div>
+
+                        <button class="btn mb-5 text-center">Confirmer</button>
+                        
+                    {{ form_end(confirmationForm) }}
+                
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+{% endblock %}

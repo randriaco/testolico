@@ -1,0 +1,20 @@
+<thead>
+    <tr>
+        {% for jour in dates|keys %}
+            <th class="text-center">{{ traducteur.traduire(jour) }}</th>
+        {% endfor %}
+    </tr>
+    <tr>
+        {% set aujourdHui = "now"|date('Y-m-d') %} <!-- Format de la date d'aujourd'hui pour la comparaison -->
+
+        {% for jour, date in dates %}
+            <th>
+                {% if date|date('Y-m-d') == aujourdHui %}
+                    <div class="ladatedujour">{{ date|date('d/m/Y') }}</div>
+                {% else %}
+                    <div class="text-center">{{ date|date('d/m/Y') }}</div>
+                {% endif %}
+            </th>
+        {% endfor %}
+    </tr>
+</thead>

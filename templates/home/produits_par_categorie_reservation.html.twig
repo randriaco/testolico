@@ -1,0 +1,82 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}Produits - {{ categorie.nom }}{% endblock %}
+
+{% block body %}
+
+    <br><br>
+
+     <div class="container mt-5 mb-4 border rounded-3 p-4" style="max-width: 800px;">
+	
+        <h1>Produits dans la catégorie : {{ categorie.nom }}</h1>
+
+        {# ------------message flash----------- #}
+        {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+        {% endfor %}
+
+         {# Bouton pour aller à la page du panier #}
+        <div class="d-flex justify-content-end mb-5">
+            <a href="{{ path('panier_afficher_reservation') }}" class="btn">Voir le panier</a>
+        </div>
+
+        <div class="row">
+            {% if produits|length > 0 %}
+                {% for produit in produits %}
+
+                    {# ------------debut affichage produits------------ #}
+
+                    <div class="card rounded-3 mb-3">									
+                        <div class="card-body p-4">
+
+                            <div class="row d-flex justify-content-between align-items-center">
+
+                                <div class="col-md-3 col-lg-3 col-xl-3">			 
+                                    <div class="d-flex justify-content-center">
+                                        <span class="bg-warning text-dark text-center ms-2 fw-bold fs-5 p-2 mb-2 rounded-3" style="width:200px;">{{ produit.nom }}</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4 col-lg-4 col-xl-4">				
+                                    <div class="d-flex justify-content-center">
+                                        {# <span class="bg-light text-dark  ms-2 fw-bold fs-5 p-2 mb-2 rounded-3"  style="width:500px;">{{ produit.description }}</span> #}
+                                         <small> {{ produit.description }} </small>
+                                    </div>
+                                </div>
+                                <br><br>
+                                <div class="col-md-3 col-lg-3 col-xl-3">			
+                                    <div class="d-flex justify-content-center">
+                                        <span class="bg-dark text-white  ms-2 fw-bold fs-5 p-2 mb-2 rounded-3">{{ produit.prix }} €</span>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2 col-lg-2 col-xl-1 d-flex justify-content-center">
+                                    <a href="{{ path('ajouter_au_panier_reservation', {'id': produit.id}) }}" class="bulle">
+                                        <i class="fa-solid fa-shopping-cart text-success"></i>
+                                        <span class="modifier">Ajouter au panier</span>
+                                    </a>
+                                </div>
+
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                    {# ------------fin affichage produits--------------- #}
+
+                {% endfor %}
+            {% else %}
+                <p>Aucun produit trouvé dans cette catégorie.</p>
+            {% endif %}
+        </div>
+
+        {# Retour à la page précédente ou à la liste des catégories #}
+        <div class="d-flex justify-content-between">
+            <a href="{{ path('commande_sur_place') }}" class="btn">Retour aux catégories</a>
+            <a href="{{ path('panier_afficher_reservation') }}" class="btn">Voir le panier</a>
+        </div>
+
+     </div>
+{% endblock %}

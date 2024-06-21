@@ -1,0 +1,26 @@
+{# templates/table/new.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>Créer les Tables pour {{ emplacement.nom }}</h1>
+
+        <div class="row">
+            {% for form in forms %}
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            {{ form_start(form) }}
+                            {{ form_widget(form) }}
+                            <button type="submit" class="btn btn-success">Créer</button>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <a href="{{ path('detail_emplacement', {'id': emplacement.id}) }}" class="btn btn-primary mt-3">Retour</a>
+    </div>
+{% endblock %}

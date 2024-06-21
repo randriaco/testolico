@@ -1,0 +1,33 @@
+<div class="border rounded-3 mb-3">
+
+
+    <h5 class=" mb-4 p-4 m-4">Selectionner la Date et l'horaire</h5>
+
+    <div class="d-flex justify-content-between p-4 row text-center ">
+
+        {% set estSemaineActuelle = (debutSemaine|date('o-W') == "now"|date('o-W')) %}
+
+        <div class="col-md-4">
+            {% if not estSemaineActuelle %}
+                <a href="{{ path('reserver', {'date': debutSemaine.modify('-1 week').format('Y-m-d')}) }}" class="btnSemaine mb-3">Semaine Précédente</a>
+            {% endif %}
+        </div>
+
+        <br><br>
+
+        <div class="text-white col-md-4">
+            <strong>
+                {{ traducteur.traduire(debutSemaine.format('F')) }} {{ debutSemaine.format('Y') }}
+            </strong>
+        </div>
+
+        <div class="col-md-4">
+            {# <a href="{{ path('reserver', {'date': finSemaine.modify('+1 day').format('Y-m-d')}) }}" class="btn btn-outline-primary">Semaine Suivante</a> #}
+            {% if afficherBoutonSemaineSuivante %}
+                <a href="{{ path('reserver', {'date': finSemaine.modify('+1 day').format('Y-m-d')}) }}" class="btnSemaine">Semaine Suivante</a>
+            {% endif %}
+        </div>
+
+    </div>
+
+</div>

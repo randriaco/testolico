@@ -1,0 +1,150 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Liste des Commandes{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <h1>Liste des Commandes</h1>
+
+        {# ------------datepicker -------------- #}
+        <label for="datePicker">Sélectionnez une date:</label>
+        <input type="text" id="datePicker" class="form-control mb-3 text-center" name="date" style="width:150px">
+
+        {# ---------Zone pour afficher les statistiques commandes ------------- #}
+        <div class="alert alert-success border rounded-3 fw-bold fs-5 p-1 mb-3 d-flex justify-content-center">
+            <div id="commandesEmporterStats" class="my-3"></div>
+        </div>
+
+		{# -----------------------bouton imprimer -------------------------- #}
+		<div class="d-flex justify-content-end mb-3">
+			<button onclick="printDocument()" class="btn">Imprimer</button>
+        </div>
+
+        <div id="commandesEmporterDetails" class="row">
+            {# Les détails des commandes seront injectés ici via JavaScript #}
+        </div>
+         
+   </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    {{ parent() }}
+
+    <script>
+		// ------------fonction permettant d'imprimer la liste des commandes -------------------
+		function printDocument() 
+		{
+			// Récupérer l'élément à imprimer
+			var elementToPrint = document.getElementById('commandesEmporterDetails').innerHTML;
+
+			// Ouvrir une nouvelle fenêtre ou un nouvel onglet
+			var newWindow = window.open();
+
+			// Ajouter le contenu à imprimer avec des styles CSS pour centrer
+			newWindow.document.write(`
+			<html>
+				<head>
+					<title>Document à imprimer</title>
+					<style>
+						body 
+						{ 
+							display: flex; 
+							justify-content: center; 
+							align-items: center; 
+							height: 100vh; 
+							margin: 0; 
+							font-family: Arial, sans-serif; 
+						}
+						.print-container 
+						{ 
+							text-align: center; 
+							border: 1px solid #000; 
+							padding: 20px; 
+							width: fit-content; 
+							max-width: 100%; 
+						}
+					</style>
+				</head>
+				<body>
+					<div class="print-container">${elementToPrint}</div>
+				</body>
+			</html>`);
+
+			// Assurez-vous que le contenu est chargé avant d'imprimer
+			newWindow.document.close();
+			newWindow.onload = function() 
+			{
+				newWindow.print();
+			};
+		}
+
+        $(document).ready(function() 
+        {
+            $('#datePicker').datepicker({
+            format: 'dd/mm/yyyy',
+            language: 'fr',
+            todayHighlight: true,
+            autoclose: true,
+            }).on('changeDate', function(e) {
+                const selectedDate = e.format('yyyy-mm-dd');
+                fetchCommandesEmporter(selectedDate);
+            });
+			
+            function fetchCommandesEmporter(date) 
+            {
+                // Remplacement de la date dans l'URL pour la requête fetch
+                const url = `{{ path('details_commandes_emporter_date', {'date': 'date-placeholder'}) }}`.replace('date-placeholder', date);
+                fetch(url)
+                    .then(response => response.json())
+                    .then(data => displayCommandesEmporter(data))
+                    .catch(error => console.error('Error:', error));
+            }
+			
+            // -----debut displayCommandesEmporter -----------
+            function displayCommandesEmporter(data) 
+            {
+                const statsContainer = document.getElementById('commandesEmporterStats');
+				const container = document.getElementById('commandesEmporterDetails');
+				container.innerHTML = '';
+
+				if (data.length === 0) 
+				{
+					statsContainer.innerHTML = 'Pas de commande pour cette date.';
+				} 
+				else 
+				{
+					statsContainer.innerHTML = 'Total de commandes: ' + data.length;
+					data.forEach(detail => 
+					{
+						let produitsDetails = '<ul>';
+						detail.detailsCommande.forEach(p => 
+						{
+							produitsDetails += `<li>${p.quantite} x ${p.nomProduit} - (${p.quantite} x ${p.prixUnitaire.toFixed(2)} € = ${p.prixTotal.toFixed(2)} €)</li>`;
+						});
+						produitsDetails += '</ul>';
+						
+						const commandeDiv = `
+							<div class="col-md-6">
+								<div class="card mb-3">
+									<div class="card-header">Détails de la Commande</div>
+									<div class="card-body">
+										<strong>Nom:</strong> ${detail.nom}<br>
+										<strong>Prénom:</strong> ${detail.prenom}<br>
+										<strong>Date Commande:</strong> ${detail.dateCommande.split('-').reverse().join('/')}<br>
+										<strong>Montant:</strong> ${detail.montantCommande}<br>
+										<div><strong>Détails des produits:</strong> ${produitsDetails}</div>
+									</div>
+								</div>
+							</div>`;
+						container.innerHTML += commandeDiv;
+					});
+				}
+            }
+            // -----fin displayCommandesEmporter ------------
+        });
+    </script>
+
+{% endblock %}

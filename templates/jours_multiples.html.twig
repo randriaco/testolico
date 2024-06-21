@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <title>{% block title %}Date Fermeture{% endblock %}</title>
+
+    <div class="container">
+    
+        <br>
+
+        <h1 class="text-center">Gestion des Jours de Fermeture</h1>
+
+        {# Affichage des messages flash #}
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+
+        <br>
+
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+            <table class="table table-bordered text-center">
+                <thead>
+                    <tr>
+                        <th>Debut Fermeture</th>
+                        <th>Fin Fermeture</th>
+                        <th>Motif</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ form_widget(form.debutFermeture) }}</td>
+                        <td>{{ form_widget(form.finFermeture) }}</td>
+                        <td>{{ form_widget(form.motif) }}</td>
+                        <td>
+                            <button type="submit" class="btn btn-primary">Ajouter</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        {{ form_end(form) }}
+
+        <br>
+
+        <h2>Liste des Fermetures</h2>
+
+        <br>
+
+        <table class="table table-bordered text-center">
+            <thead>
+                <tr>
+                    <th>Début Fermeture</th>
+                    <th>Fin Fermeture</th>
+                    <th>Motif</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for fermeture in listeFermetures %}
+
+                    <tr>
+                        <td>{{ fermeture.debutFermeture|date('d/m/Y') }}</td>
+                        <td>{{ fermeture.finFermeture|date('d/m/Y') }}</td>
+                        <td>{{ fermeture.motif }}</td>
+                        <td>
+                            <a href="{{ path('modifier_jours_multiples', {'id': fermeture.id}) }}" class="btn btn-primary">Modifier</a>
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                Supprimer
+                            </button>
+                        </td>
+                    </tr>
+
+                    {# ------------------------------------------debut :  Modal --------------------------------------------- #}
+                    
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Supprimer Date de Fermeture</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Etes-vous sur de supprimer cette date ?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Non</button>
+                                <a href="{{ path('supprimer_jours_multiples', {'id': fermeture.id}) }}" class="btn btn-danger">Oui</a>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {# ------------------------------------------fin :  Modal --------------------------------------------- #}
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+
+    </div>
+    
+{% endblock %}

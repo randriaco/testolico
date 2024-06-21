@@ -1,0 +1,708 @@
+/* --------------------------- debut : bouton bootstrap personnalisé----------------------------------- */
+
+/* Styliser le label pour les boutons radio personnalisés */
+.label-radio-personnalise 
+{
+    width: 100px; 
+    background-color: #90EE90; /* Fond vert clair */
+    border: 2px solid green; 
+    color: black; 
+    font-weight: bold;
+
+    text-align: center; 
+    border-radius: 0.25rem; 
+    padding: 0.375rem 0.75rem; 
+    line-height: 1.5; /* Hauteur de ligne pour centrer le texte verticalement */
+    vertical-align: middle; /* Ajustement vertical si nécessaire */
+    cursor: pointer; /* Change le curseur en main pour indiquer que c'est cliquable */
+}
+
+/* Ajouter des effets au survol pour une meilleure interaction utilisateur */
+.label-radio-personnalise:hover 
+{
+    background-color: #76b476; /* Un peu plus foncé que le fond standard au survol */
+    border-color: #006400; /* Bordure un peu plus foncée au survol */
+}
+
+/* ---------------------------- fin : bouton bootstrap personnalisé----------------------------------- */
+
+
+/* ---------------------- -----Fond image et margin-padding---------------------- */
+
+.photoAccueil
+{
+  background: url("../photos/recherche.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 95vh;
+}
+
+.fondImageContact
+{
+  background: url("../photos/contact.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 550px;
+  color: black;
+}
+
+.fondImageFooter
+{
+  background: url("../photos/footer.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+}
+
+.fondImageLogin
+{
+  background: url("../photos/login.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+}
+
+.fondImagePro
+{
+  background: url("../photos/pro.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+}
+
+/* --------------margin - padding--------------- */
+
+.formulaire
+{
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.pad-icon {
+  
+  padding-left: 20px
+}
+
+/* ----------------------------Fond couleur - background--------------------- */
+
+.fondVert
+{
+  background-color: #32CD32;
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+.fondJaune
+{
+  background-color: yellow;
+  color: black;
+  text-align: center;
+  padding: 10px;
+}
+
+.fondBlanc {
+  background-color: white;
+  padding: 20px
+}
+
+.jaune
+{
+  font-weight: bold;
+  font-size: 20px;
+  color: #32CD32;
+}
+
+span
+{
+  color: yellow;
+}
+
+.vertGras
+{
+  color: #32CD32;
+}
+
+.gras
+{
+  font-weight: bold;
+  font-size: 15px;
+  color: black;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+
+/* ------------------------- navbar ------------------------------ */
+
+.navbar
+{
+    background-color:white ;
+    box-shadow: 10px 5px 5px gray;
+}
+
+.navbar-brand 
+{
+  /* background-color: white; */
+  color: #32CD32;
+  /* font-size: 30px !important; */
+  /* font-family: 'Redressed', cursive; */
+  color: black;
+  border-left: none;
+  border-right: none;
+  /* box-shadow: none; */
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;  
+  font-weight: bold;
+}
+
+.navbar-toggler
+{
+  background-color:black;
+  color:white;
+  border:3px solid #32CD32;
+}
+
+/* ----------------------------Liens a - focus-------------------------- */
+
+/* #logo a
+{
+  background-color: white;
+  border-left: none;
+  border-right: none;
+  box-shadow: none;
+} */
+
+#logo a 
+{
+  background-color: white;
+  border-left: none;
+  border-right: none;
+  box-shadow: none;
+  font-family: 'Abril Fatface', cursive;
+  font-size: 40px;
+  font-weight: bold;
+  color:#32CD32;
+}
+
+#logo a:hover
+{
+  /* background-color: white; */
+  border: none;
+  box-shadow: none;
+}
+
+.navbar a
+{
+  background-color: #32CD32;
+  color: white;
+  border-radius: 20px;
+  box-shadow: 5px 5px 5px grey;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;  
+  font-weight: bold;
+  padding: 10px;
+  margin: 10px;
+  /* width: 200px; */
+  width: 230px;
+  text-align: center;
+}
+
+.navbar a:hover 
+{
+    background-color: #32CD32;
+    color: white;
+    border: 3px solid yellow;
+    /* border-right: 10px solid yellow; */
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;  
+    font-weight: bold;
+    padding: 10px;
+    margin-right: 10px;
+    /* width: 200px; */
+    width: 230px;
+    text-align: center;
+}
+
+nav a .active
+{
+    background-color: white;
+    color: black;
+    border-left: 10px solid #32CD32;
+    border-right: 10px solid #32CD32;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;  
+    font-weight: bold;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+footer a
+{
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.ForgotPassBtn
+{
+  text-decoration: none;
+}
+
+/* ----------------------------Titre h1, h2, etc------------------ */
+
+.enteteTitre
+{
+    font-family: 'Abril Fatface', cursive;
+    font-size: 40px;
+    font-weight: bold;
+    color: #32CD32;    
+    text-align: center;
+}
+
+.enteteTitreNoir
+{
+    font-family: 'Abril Fatface', cursive;
+    font-size: 40px;
+    font-weight: bold;
+    color: black;    
+    text-align: center;
+}
+
+h1
+{
+    /* margin-top: 100px; */
+    /* margin-bottom: 40px; */
+    font-family: 'Abril Fatface', cursive;
+    font-size: 40px;
+    font-weight: bold;
+    color: black;    
+    text-align: center;
+}
+
+h5
+{
+  background-color: #32CD32;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.h1Client
+{
+    padding: 20px;
+    font-family: 'Abril Fatface', cursive;
+    font-size: 40px;
+    font-weight: bold;
+    color: black;    
+    text-align: center;
+}
+
+h2
+{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    font-family: 'Abril Fatface', cursive;
+    font-size: 40px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+}
+
+h3
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    text-align: left;
+}
+
+.ecriture
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-family:  'Abril Fatface', cursive;
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+    text-align: center;
+}
+
+marquee
+{
+  color: red;
+  font-weight: bold;
+  font-size: 20px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  /* border: 1px solid grey; */
+}
+
+/* --------------------Input - Btn - form control  --------------------------- */
+
+input
+{
+  width: 400px;
+  box-shadow: 10px 5px 5px gray;
+  border: 1px solid whitesmoke;
+}
+
+form input
+{
+  width: 400px;
+  box-shadow: 10px 5px 5px gray;
+  border: 1px solid whitesmoke;
+}
+
+#checkbox
+{
+  box-shadow: none;
+  border: none;
+  text-align: left;
+  width: 20px;
+}
+
+.checkbox
+{
+  box-shadow: none;
+  border: none;
+  text-align: left;
+  width: 20px;
+}
+
+textarea
+{
+  box-shadow: 10px 5px 5px gray;
+  border: 1px solid whitesmoke;
+}
+
+.btn
+{
+  margin-top: 30px;
+  background-color: #32CD32;
+  color: yellow;
+  border-radius: 10px;
+  border: thick double white;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;  
+  font-weight: bold;
+  padding: 10px;
+  width: 250px;
+  box-shadow: 10px 5px 5px gray;
+}
+
+.btnSemaine
+{
+  margin-top: 30px;
+  background-color: #32CD32;
+  color: yellow;
+  border-radius: 10px;
+  border: thick double white;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;  
+  font-weight: bold;
+  padding: 10px;
+  width: 250px;
+  box-shadow: 10px 5px 5px gray;
+  text-decoration: none;
+}
+
+.btn:hover
+{
+  margin-top: 30px;
+  background-color: #32CD32;
+  color: white;
+  border-radius: 10px;
+  border: thick double white;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;  
+  font-weight: bold;
+  padding: 10px;
+  width: 250px;
+  box-shadow: 10px 5px 5px gray;
+}
+
+.btnSemaine:hover
+{
+  margin-top: 30px;
+  background-color: #32CD32;
+  color: white;
+  border-radius: 10px;
+  border: thick double white;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;  
+  font-weight: bold;
+  padding: 10px;
+  width: 250px;
+  box-shadow: 10px 5px 5px gray;
+}
+
+.btnPetit
+{
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-left: 30px;
+  background-color: #32CD32;
+  color: yellow;
+  border-radius: 10px;
+  border: thick double white;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;  
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  width: 300px;
+  box-shadow: 10px 5px 5px gray;
+  text-decoration: none;
+}
+
+.btnPetit:hover
+{
+  margin-top: 5px;
+  margin-bottom: 10px;
+  margin-left: 30px;
+  background-color: #32CD32;
+  color: white;
+  border-radius: 10px;
+  border: thick double white;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;  
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  width: 300px;
+  box-shadow: 10px 5px 5px gray;
+  text-decoration: none;
+}
+
+.btnPanier
+{
+  /* margin-top: 5px; */
+  /* margin-bottom: 10px; */
+  /* margin-left: 30px; */
+  background-color: #32CD32;
+  color: yellow;
+  border-radius: 10px;
+  border: thick double white;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;  
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  width: 100px;
+  box-shadow: 10px 5px 5px gray;
+  text-decoration: none;
+}
+
+.btnNoir
+{
+  /* margin-top: 5px; */
+  /* margin-bottom: 10px; */
+  /* margin-left: 30px; */
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  /* border: thick double white; */
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;  
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  width: 600px;
+  /* box-shadow: 10px 5px 5px gray; */
+  text-decoration: none;
+}
+
+.active
+{
+  /* margin-top: 5px; */
+  /* margin-bottom: 10px; */
+  margin-right: 30px;
+  background-color: white;
+  color: black;
+  /* border-radius: 10px; */
+  /* border: thick double white; */
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;  
+  font-weight: bold;
+  text-align: center;
+  padding: 10px;
+  width: 300px;
+  /* box-shadow: 10px 5px 5px gray; */
+  text-decoration: none;
+}
+
+/* ------------------------------info bulle ---------------------------------------- */
+
+section a
+{
+    text-decoration: none;
+    
+}
+
+section .bulle
+{
+    text-decoration: none;
+    position:relative;
+    /* color:#C800F0; */
+    /* font-family:arial, verdana, sans-serif; */
+    /* text-align:center; */
+}
+
+section .bulle span 
+{
+    display: none;   
+}
+
+section .bulle:hover span 
+{
+    display: block;
+    position: absolute;
+    /* top: -100px;  */
+    right: 0px;
+    font-family:arial, verdana, sans-serif;
+    text-align:center;
+    font-size:17px;
+    color:yellow;
+    font-weight:bold;
+    width:200px;
+    background: #32CD32;
+    padding: 5px;
+    border: thick double 1px white ;
+    border-radius: 15px;
+    text-indent: 0;
+}
+
+.bulle span 
+{
+    display: none;   
+}
+
+.bulle:hover span 
+{
+    display: block;
+    position: absolute;
+    top: -10px; 
+    right: 0px;
+    font-family:arial, verdana, sans-serif;
+    text-align:center;
+    font-size:17px;
+    color:white;
+    font-weight:bold;
+    width:200px;
+    background: blue;
+    padding: 5px;
+    border: thick double 1px white ;
+    border-radius: 15px;
+    text-indent: 0;
+}
+
+/* --------------------reseaux sociaux facebook tweeter  -------------------------- */
+
+.fa
+{
+  color: #32CD32;
+}
+
+.fa-brands
+{
+  color: #32CD32;
+}
+
+.fa-solid
+{
+  color: #32CD32;
+}
+
+/* ----------------------------- card  --------------------------------- */
+
+.card-title
+{
+  background-color: #32CD32;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.card-text
+{
+  text-align: center;
+}
+
+/* -------------------------  footer ----------------------------------- */
+
+footer
+{
+  background-color: white;
+}
+
+footer p
+{
+  font-weight: bold;
+}
+
+
+/* -------------------------css contact--------------------------- */
+
+
+.fondImageContact1
+{
+  background: url("../photos/contact.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+}
+
+.fondImageContact2
+{
+  background: url("../photos/contact2.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 400px;
+}
+
+.fondImageContact3
+{
+  background: url("../photos/contact3.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 750px;
+}
+
+section 
+{
+    width: auto;
+}
+
+
+/* ------------------------------------------------------------------ */
+
+form .container {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 20px auto
+}
+
+
+.msg 
+{
+  height: 220px !important;
+}
+
+/* --------------------------------css : login ---------------------- */
+
+.ForgotPassBtn
+{
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+
+.signin 
+{
+  background-color: white;
+  padding: 3Opx;
+  margin: auto;
+  height: auto;
+}

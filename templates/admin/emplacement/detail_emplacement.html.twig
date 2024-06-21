@@ -1,0 +1,42 @@
+{# templates/emplacement/show.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <h1>Détails de l Emplacement</h1>
+
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>ID</th>
+                    <td>{{ emplacement.id }}</td>
+                </tr>
+                <tr>
+                    <th>Nom</th>
+                    <td>{{ emplacement.nom }}</td>
+                </tr>
+                <tr>
+                    <th>Nombre de Tables</th>
+                    <td>{{ emplacement.tables|length }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Tables</h2>
+        <ul>
+            {% for table in emplacement.tables %}
+                <li>{{ table.nom }} - {{ table.nombreChaise }} chaises</li>
+            {% endfor %}
+        </ul>
+
+        <a href="{{ path('liste_emplacement') }}" class="btn btn-primary">Retour à la liste</a>
+        <a href="{{ path('modifier_emplacement', {'id': emplacement.id}) }}" class="btn btn-warning">Modifier</a>
+        <form method="post" action="{{ path('supprimer_emplacement', {'id': emplacement.id}) }}" style="display: inline-block;" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet emplacement ?');">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ emplacement.id) }}">
+            <button class="btn btn-danger">Supprimer</button>
+        </form>
+    </div>
+
+{% endblock %}

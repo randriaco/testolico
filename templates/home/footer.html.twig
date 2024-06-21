@@ -1,0 +1,59 @@
+<footer class="mt-5 mb-5">
+
+	<div class="container-fluid text-center text-md-start"> 
+
+		<div class="row mt-3">
+
+			<div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 fondImageFooter">                               
+				<h6 class="text-uppercase fw-bold fondVert"><span>RESTO</span>LICO</h6>                           
+				<p class="text-center fw-bold mt-5">
+					Réservation en ligne <br>
+					Commande en ligne <br>
+					disponible 24h/24 - 7j/7
+				</p>
+				<p class="text-center fw-bold fs-4 fondJaune"> GRATUITEMENT </p>
+			</div>
+			
+			<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+				<h6 class="text-uppercase fw-bold fondVert"><span>Liens</span> Utiles</h6>
+				<a href="#" class="text-dark"><span class="jaune">></span> A propos de nous</a>
+				<br />
+				<a href="#!" class="text-dark"><span class="jaune">></span> Mentions Legales</a>
+				
+			</div>
+			
+			<div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+				<h6 class="text-uppercase fw-bold fondVert"><span>Liens</span> Rapides</h6>
+				<i class="fa-regular fa-plate-utensils"></i>
+				<a href="#!" class="text-dark"><span class="jaune">></span> Accueil</a>
+				<br />
+				<a href="#!" class="text-dark"><span class="jaune">></span> Espace Client</a>
+				<br />
+				<a href="#!" class="text-dark"><span class="jaune">></span> Espace Professionnel</a>
+				<br />
+				<a href="#!" class="text-dark"><span class="jaune">></span> Contact</a>
+			</div>
+
+			<div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+				<h6 class="text-uppercase fw-bold fondVert"><span>Nous</span> Contacter</h6>
+				<p>
+					<i class="fa fa-home mr-3"></i>
+					{{ restaurant.nom }} <br>
+					{{ restaurant.adresse }} <br>
+					{{ restaurant.code }} {{ restaurant.ville }}
+				</p>
+				<p><i class="fa fa-envelope mr-3"></i>  {{ restaurant.email }}</p>
+					<hr>
+					<p ><i class="fa-brands fa-facebook-f"></i> Facebook </p>
+					<p><i class="fa-brands fa-twitter"></i> Twitter</p> 
+			</div>
+
+		</div>
+
+		<div class="text-center text-white fw-bold p-3" style="background-color: #32CD32">
+			© 2024 Copyright - <strong>{{ restaurant.nom }}</strong>
+		</div>
+
+	</div> 
+
+</footer>

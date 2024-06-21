@@ -1,0 +1,21 @@
+/* ----------creneaux encadrés-------------- */
+.creneaux {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+.creneau {
+    border: 1px solid #ddd;
+    padding: 5px;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+/* ----------la date du jour encadré vert-------------- */
+.ladatedujour {
+    background-color: green;
+    font-weight: bold; 
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+}
